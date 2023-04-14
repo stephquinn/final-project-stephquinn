@@ -19,9 +19,9 @@ Sane Data Updates questions:
 
 The data updates daily, according to MDE. There's no "last updated" column, but I think I could probably use the inspection_date column in the compliance dataset and the enforcement_action_issued column in the enforcement dataset as proxies. So in order to do incremental updates, I can follow the pseudocode guidance from Sane Data Updates of checking for values in the above date columns from the past day every day and process new records accordingly. 
 
-Thinking about what counts as an update, I'm thinking new records, as well updates where there's a date range within a single row. For instance, in the enforcement data, there are two date columns: enforcement_action_issued and case_closed. I don't see a primary key. For a natural key, I think I'd have to use more than two columns: site_no, media, program and enforcement_action_issued? That seems crazy. Maybe I'll just stick with new records.
+Thinking about what counts as an update, I'm thinking new records, and maybe updates where there's a date range within a single row. For instance, in the enforcement data, there are two date columns: enforcement_action_issued and case_closed. I don't see a primary key. For a natural key, I think I'd have to use more than two columns: site_no, media, program and enforcement_action_issued? That seems crazy and maybe not a top priority. Maybe I'll just stick with new records.
 
 To alert users to changes, it would be great if I could have the table part of the app display rows in reverse chronological order. WSA's current dashboard does not do this. Would it be difficult to do that in my app?
 
-I don't have ethical qualms about displaying any of this data, but some of it might not be super relevant to the average user.
+I don't think it's necessary to display complete addresses - I would probably just display the city/town and county. Some of the data might not be super relevant to the average user. From the compliance dataset, I might filter out the NPDES number, permit number or complaint number, since most users won't have those. For enforcement, I could probably filter out the enforcement action number.
 
