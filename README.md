@@ -23,5 +23,5 @@ Thinking about what counts as an update, I'm thinking new records, and maybe upd
 
 To alert users to changes, it would be great if I could have the table part of the app display rows in reverse chronological order. WSA's current dashboard does not do this. Would it be difficult to do that in my app?
 
-I don't think it's necessary to display complete addresses - I would probably just display the city/town and county. Some of the data might not be super relevant to the average user. From the compliance dataset, I might filter out the NPDES number, permit number or complaint number, since most users won't have those. For enforcement, I could probably filter out the enforcement action number.
+I don't think it's necessary to display complete addresses - I would probably just display the city/town and county. I think some of the addresses are private residences, and I wouldn't want to display those. Some of the data might not be super relevant to the average user. From the compliance dataset, I might filter out the NPDES number, permit number or complaint number, since most users won't have those. For enforcement, I could probably filter out the enforcement action number.
 
