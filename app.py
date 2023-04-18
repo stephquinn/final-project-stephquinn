@@ -26,12 +26,17 @@ class Inspection(Model):
         table_name = "inspections"
         database = db
 
+class EnforcementAction(Model):
+    #START HERE
+
 @app.route("/")
-def wsa_data():
+def wsa_compliance():
     url = "https://opendata.maryland.gov/resource/hxmu-urvx.json"
     response = requests.get(url)
-    wsa_data = response.json()
-    return wsa_data
+    wsa_compliance = response.json()
+    return wsa_compliance
+
+@app.route("/sitename/<slug>")
 
 
 @app.route("/")
