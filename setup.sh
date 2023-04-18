@@ -1,1 +1,1 @@
-pip install Flask requests json
+pip install Flask requests peewee requests
