@@ -1,4 +1,5 @@
 from peewee import *
+from sqlite_utils import *
 import requests
 from flask import Flask
 from flask import render_template
@@ -21,8 +22,9 @@ class Inspection(Model):
     compliance_assist= BooleanField()
 
     class Meta:
-        table_name = "inspections"
         database = db
+
+db.create_tables([Inspection], safe=True)
 
 class Enforcement(Model):
     ai_id: IntegerField(unique=True)
@@ -40,17 +42,14 @@ class Enforcement(Model):
         table_name = "enforcements"
         database = db
 
-def get_compliance():
+    
+
+@app.route("/")
+def index():
     url = "https://opendata.maryland.gov/resource/hxmu-urvx.json"
     response = requests.get(url)
     wsa_compliance = response.json()
     return wsa_compliance
-
-@app.route("/")
-def index():
-    inspection_count = Inspection.select().count()
-    template= "index.html"
-    return render_template(template, count=inspection_count)
 
 
 if __name__ == '__main__':

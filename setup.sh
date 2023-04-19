@@ -1,1 +1,1 @@
-pip install Flask requests peewee requests
+pip install Flask requests peewee requests sqlite-utils
