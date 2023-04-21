@@ -9,7 +9,6 @@ app = Flask(__name__)
 db = SqliteDatabase('wsa.db')
 
 class Inspection(Model):
-    documentpage = TextField()
     ai_id = IntegerField()
     site_name = CharField()
     city_state_zip = CharField()
@@ -21,12 +20,11 @@ class Inspection(Model):
     site_status = CharField()
     site_condition = CharField()
     recommended_actions = TextField()
-    compliance_assist = BooleanField()
-    paf_no = CharField()
 
     class Meta:
         table_name = "inspections"
         database = db
+        primary_key = CompositeKey('ai_id', 'fir_inspection_date')
 
 #class Enforcement(Model):
     #ai_id: IntegerField(unique=True)
@@ -43,6 +41,7 @@ class Inspection(Model):
     #class Meta:
         #table_name = "enforcements"
         #database = db
+        #primary_key = CompositeKey('ai_id', 'fir_inspection_date')
 
 @app.route("/")
 def index():

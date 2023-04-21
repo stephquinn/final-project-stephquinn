@@ -9,10 +9,9 @@
 <body>
     <div class="container">
         <h1>Maryland Water and Science Administration Inspections</h1>
-        <p>There are {{ inspection_count }} inspections in the database.</p>
+        <!--<p>There are {{ inspection_count }} inspections in the database.</p>-->
         <table border=1 cellpadding=7>
             <tr>
-                <th>Document Page</th>
                 <th>Site ID</th>
                 <th>Site Name</th>
                 <th>Site Location</th>
@@ -24,12 +23,9 @@
                 <th>Site Status</th>
                 <th>Site Condition</th>
                 <th>Recommended Action</th>
-                <th>Compliance Assist</th>
-                <th>PAF Number</th>
             </tr>
-            {% for recent_inspection in recent_inspections %}
+            {% for inspection in recent_inspections %}
             <tr>
-                <td>{{ inspection.documentpage }}</td>
                 <td>{{ inspection.ai_id }}</td>
                 <td>{{ inspection.site_name }}</td>
                 <td>{{ inspection.city_state_zip }}</td>
@@ -41,8 +37,6 @@
                 <td>{{ inspection.site_status }}</td>
                 <td>{{ inspection.site_condition }}</td>
                 <td>{{ inspection.recommended_actions }}</td>
-                <td>{{ inspection.compliance_assist }}</td>
-                <td>{{ inspection.pag_no }}</td>
             </tr>
             {% endfor %}
         </table>
