@@ -27,9 +27,8 @@
                 <th>Compliance Assist</th>
                 <th>PAF Number</th>
             </tr>
-            {% for recent_inspection in recent_inspections %}
+            {% for inspection in recent_inspections %}
             <tr>
-                <td>{{ inspection.documentpage }}</td>
                 <td>{{ inspection.ai_id }}</td>
                 <td>{{ inspection.site_name }}</td>
                 <td>{{ inspection.city_state_zip }}</td>

@@ -27,6 +27,7 @@ class Inspection(Model):
     class Meta:
         table_name = "inspections"
         database = db
+        primary_key = CompositeKey('ai_id', 'fir_inspection_date')
 
 #class Enforcement(Model):
     #ai_id: IntegerField(unique=True)
