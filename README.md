@@ -5,13 +5,15 @@
 
 Blockers: 
 
-I used the sqlite utils documentation for the code I originally used to load my inspection data, and that code included pk=id as a placeholder. In keeping this code, I inadvertently 
+I used the sqlite utils documentation for the code I originally used to load my inspection data, and that code included pk=id as a placeholder. In keeping this code, I inadvertently established the expectation that a column named id (which didn't exist) would be the primary key. So peewee kept giving me an error, and I couldn't load my table. With your help (thank you!), I deleted my db file and redefined my primary key. So now I have a basic table.
+
+importance of matching variable  names!!!
 
 Right now, I'm not sure I understand why inspections appear to repeat when I fire up the server. For instance, why do there seem to be four identical inspection rows for 24 Duck Hollow Dr in Elkton from May 20? There has to be a way to write code to not display duplicate rows. Maybe that can be one thing I do this coming week.
 
 Also, what will I do about sites that are residential addresses, like 24 Duck Hollow Dr? This is the kind of information I would probably omit for someone's house, but there's no other site name.
 
-This coming week, it would be great to 
+This coming week, it would be great to link site ids from the inspections table to site ids in the actions table and make it so that users can click on site names to call up enforcement actions for those sites on a detail page.
 
 --
 First update:
