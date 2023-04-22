@@ -1,6 +1,20 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10834836)
 # final-project
 
+4/21 update: My main goal this week was to write code to load data from the WSA inspections table and display it in table form - which I have more or less done, with a lot of help. Since I know that my final product will use data from both the inspections and enforcement actions tables, I described the column names and datatypes for both in my app.py file, and my data bash file loads data from both tables. That said, I am currently only displaying data from the inspections table, because I need to look more closely at my data to figure out how I want to use data from the actions table.
+
+Blockers: 
+
+I used the sqlite utils documentation for the code I originally used to load my inspection data, and that code included pk=id as a placeholder. In keeping this code, I inadvertently 
+
+Right now, I'm not sure I understand why inspections appear to repeat when I fire up the server. For instance, why do there seem to be four identical inspection rows for 24 Duck Hollow Dr in Elkton from May 20? There has to be a way to write code to not display duplicate rows. Maybe that can be one thing I do this coming week.
+
+Also, what will I do about sites that are residential addresses, like 24 Duck Hollow Dr? This is the kind of information I would probably omit for someone's house, but there's no other site name.
+
+This coming week, it would be great to 
+
+--
+First update:
 Just wanted to preface this by saying that I'd really appreciate guidance about what to prioritize/what's doable or not/where to start!
 
 Ideally, my news app would show which kinds of violations the Maryland Department of the Environment's Water and Science Administration is likely to act on - and which it tends to ignore. It would also be great if it could enable users to see whether the broad state-wide trends that the app underlines also pertain where they live. This would require joining two datasets: WSA compliance inspections (https://opendata.maryland.gov/Energy-and-Environment/Maryland-Department-of-the-Environment-Water-and-S/hxmu-urvx) and WSA enforcement actions (https://opendata.maryland.gov/Energy-and-Environment/Maryland-Department-of-the-Environment-Water-and-S/qbwh-5vec). 

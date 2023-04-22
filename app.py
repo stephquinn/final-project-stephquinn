@@ -6,8 +6,10 @@ from flask import Flask
 from flask import render_template
 app = Flask(__name__)
 
+#create a Sqlite database to hold my tables (one for inspections and one for enforcement actions)
 db = SqliteDatabase('wsa.db')
 
+#define column names and data types for my inspections table
 class Inspection(Model):
     ai_id = IntegerField()
     site_name = CharField()
@@ -20,29 +22,30 @@ class Inspection(Model):
     site_status = CharField()
     site_condition = CharField()
     recommended_actions = TextField()
-
+#name the table and set primary key
     class Meta:
         table_name = "inspections"
         database = db
         primary_key = CompositeKey('ai_id', 'fir_inspection_date')
 
-#class Enforcement(Model):
-    #ai_id: IntegerField(unique=True)
-    #ai_name: CharField()
-    #city_state_zip: CharField()
-    #county: CharField()
-    #enforcement_action: CharField()
-    #enforcement_action_number: CharField()
-    #enforcement_action_issued: DateTimeField()
-    #case_closed: DateTimeField()
-    #media: CharField()
-    #program: CharField()
-
-    #class Meta:
-        #table_name = "enforcements"
-        #database = db
-        #primary_key = CompositeKey('ai_id', 'fir_inspection_date')
-
+#define column names and data types for my actions table
+class Action(Model):
+    ai_id = IntegerField()
+    ai_name = CharField()
+    city_state_zip = CharField()
+    county = CharField()
+    enforcement_action = CharField()
+    enforcement_action_number = CharField()
+    enforcement_action_issued = DateTimeField()
+    case_closed = DateTimeField()
+    media = CharField()
+    program = CharField()
+#name the table and set primary key
+    class Meta:
+        table_name = "actions"
+        database = db
+        primary_key = CompositeKey('ai_id', 'enforcement_action_issued')
+#define variables to be displayed on index page
 @app.route("/")
 def index():
     inspection_count = Inspection.select().count()
