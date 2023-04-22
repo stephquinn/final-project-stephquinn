@@ -11,7 +11,7 @@ I also learned the importance of keeping variable and table names consistent - a
 
 Right now, I'm not sure I understand why inspections appear to repeat when I fire up the server. For instance, why do there seem to be four identical inspection rows for 24 Duck Hollow Dr in Elkton from May 20? There has to be a way to write code to not display duplicate rows. Maybe that can be one thing I do this coming week.
 
-Also, what will I do about sites that are residential addresses, like 24 Duck Hollow Dr? This is the kind of information I would probably omit for someone's house, but there's no other site name.
+Also, what will I do about sites that are residential addresses, like 24 Duck Hollow Dr? This is the kind of information I would probably omit for someone's house, but there's no other site name. Also, there are some things that are formatted strangely in my table - spaces missing between words and a hard-to-read date-time format, for instance. I will aim to fix those this week too.
 
 Plans: 
 
