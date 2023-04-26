@@ -1,4 +1,5 @@
-
+#remove existing db to avoid duplicate records
+rm wsa.db
 #get WSA inspection files as json using Maryland Open Data API endpoint 
 wget -O inspections.json "https://opendata.maryland.gov/resource/hxmu-urvx.json"
 #insert the above data in a Sqlite database called wsa.db
