@@ -12,12 +12,13 @@ db = SqliteDatabase('wsa.db')
 
 #define column names and data types for my inspections table
 class Inspection(Model):
-    ai_id = IntegerField()
+    document = CharField()
+    site_no = IntegerField()
     site_name = CharField()
     city_state_zip = CharField()
-    county = CharField()
     inspection_type = CharField()
-    fir_inspection_date = DateTimeField()
+    county = CharField()
+    inspection_date = DateTimeField()
     permit_no = CharField()
     npdes_no = CharField()
     site_status = CharField()
