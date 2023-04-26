@@ -1,1 +1,1 @@
-pip install Flask requests peewee requests sqlite-utils
+pip install Flask requests peewee requests sqlite-utils jinja2 arrow

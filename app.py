@@ -4,6 +4,7 @@ import requests
 import json
 from flask import Flask
 from flask import render_template
+from arrow import Arrow
 app = Flask(__name__)
 
 #create a Sqlite database to hold my tables (one for inspections and one for enforcement actions)
@@ -49,10 +50,15 @@ class Action(Model):
 @app.route("/")
 def index():
     inspection_count = Inspection.select().count()
-    recent_inspections = Inspection.select().order_by(Inspection.fir_inspection_date.desc()).limit(10)
+    #recent_inspections = Inspection.select().order_by(Inspection.fir_inspection_date.desc()).limit(10)
+    most_violations = (Inspection
+         .select(Inspection.site_name, fn.COUNT(Inspection.result).alias('count'))
+         .where(Inspection.result == 'Noncompliance')
+         .group_by(Inspection.site_name)
+         .order_by(fn.DESC('count'))),limit(10)
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections)
-    
+    return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations)
+   
 
 if __name__ == '__main__':
     # Fire up the Flask test server

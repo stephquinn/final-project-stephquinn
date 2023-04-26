@@ -7,6 +7,8 @@ The detail page would then list all inspections (whether they resulted in violat
 
 A first step would be to separate my current city/state/zip column into one city column and one zip column.
 
+Will I only ever be able to show the most recent 1000 inspections? Because that kind of ruins the premise of my app.
+
 4/21 update: My main goal this week was to write code to load data from the WSA inspections table and display it in table form - which I have more or less done, with a lot of help. Since I know that my final product will use data from both the inspections and enforcement actions tables, I described the column names and datatypes for both in my app.py file, and my data bash file loads data from both tables. That said, I am currently only displaying data from the inspections table, because I need to look more closely at my data to figure out how I want to use data from the actions table.
 
 Blockers: 

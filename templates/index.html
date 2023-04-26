@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Maryland Water and Science Administration Inspections</h1>
-        <!--<p>There are {{ inspection_count }} inspections in the database.</p>-->
+        <p>There are {{ inspection_count }} inspections in the database.</p>
         <table border=1 cellpadding=7>
             <tr>
                 <th>Site ID</th>
@@ -31,7 +31,7 @@
                 <td>{{ inspection.city_state_zip }}</td>
                 <td>{{ inspection.county }}</td>
                 <td>{{ inspection.inspection_type }}</td>
-                <td>{{ inspection.fir_inspection_date }}</td>
+                <td>{{ inspection.fir_inspection_date|iso8601_to_time|datetimeformat('%d %B %Y') }}</td>
                 <td>{{ inspection.permit_no }}</td>
                 <td>{{ inspection.npdes_no }}</td>
                 <td>{{ inspection.site_status }}</td>
