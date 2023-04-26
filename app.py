@@ -52,10 +52,10 @@ def index():
     inspection_count = Inspection.select().count()
     recent_inspections = Inspection.select().order_by(Inspection.fir_inspection_date.desc()).limit(10)
     most_violations = (Inspection
-         .select(Inspection.site_name, fn.COUNT(Inspection.site_status).alias('count'))
+         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
          .where(Inspection.site_status == 'Noncompliance')
-         .group_by(Inspection.site_name)
-         .order_by(fn.DESC('count'))).limit(10)
+         .group_by(Inspection.county)
+         .order_by(fn.COUNT(Inspection.site_status).desc()))
     template = "index.html"
     return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations)
    
