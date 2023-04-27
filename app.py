@@ -53,8 +53,14 @@ class Action(Model):
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 #define variables to be displayed on index page
 #maybe add "significant noncompliance" and other noncompliance categories
-@app.route("/")
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        search_term = request.form['search_term']
+        results = (Action.select(Action, ActionIndex.rank()).join(MinuteIndex,on=(Minute.id == MinuteIndex.rowid)).where(MinuteIndex.match(search_term)).order_by(MinuteIndex.rank()))
+
+
+
     inspection_count = Inspection.select().count()
     recent_inspections = Inspection.select().order_by(Inspection.inspection_date.desc()).limit(10)
     most_violations = (Inspection
