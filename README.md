@@ -1,6 +1,9 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10834836)
 # final-project
 
+primary_key = CompositeKey('ai_id', 'fir_inspection_date')
+
+
 4/28 update: What I envision is an index page that lists the top ten zipcodes in Maryland with the most violations in the current month - and a search bar allowing the user to pull up a detail page for any zipcode in Maryland.
 
 The detail page would then list all inspections (whether they resulted in violations or not) and enforcement actions in that zipcode, with an individual table for each site. 

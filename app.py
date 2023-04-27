@@ -16,28 +16,32 @@ class Inspection(Model):
     site_no = IntegerField()
     site_name = CharField()
     city_state_zip = CharField()
-    inspection_type = CharField()
     county = CharField()
+    inspection_type = CharField()
     inspection_date = DateTimeField()
     permit_no = CharField()
     npdes_no = CharField()
+    complaint_tracking_no = CharField()
+    inspection_reason = CharField()
     site_status = CharField()
     site_condition = CharField()
     recommended_actions = TextField()
+    compliance_assist = BooleanField()
 #name the table and set primary key
     class Meta:
         table_name = "inspections"
         database = db
-        primary_key = CompositeKey('ai_id', 'fir_inspection_date')
+        primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
 
 #define column names and data types for my actions table
 class Action(Model):
-    ai_id = IntegerField()
-    ai_name = CharField()
+    document = CharField()
+    site_no = IntegerField()
+    site_name = CharField
     city_state_zip = CharField()
     county = CharField()
     enforcement_action = CharField()
-    enforcement_action_number = CharField()
+    enforcement_action_no = CharField()
     enforcement_action_issued = DateTimeField()
     case_closed = DateTimeField()
     media = CharField()
@@ -46,12 +50,13 @@ class Action(Model):
     class Meta:
         table_name = "actions"
         database = db
-        primary_key = CompositeKey('ai_id', 'enforcement_action_issued')
+        primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 #define variables to be displayed on index page
+#maybe add "significant noncompliance" and other noncompliance categories
 @app.route("/")
 def index():
     inspection_count = Inspection.select().count()
-    recent_inspections = Inspection.select().order_by(Inspection.fir_inspection_date.desc()).limit(10)
+    recent_inspections = Inspection.select().order_by(Inspection.inspection_date.desc()).limit(10)
     most_violations = (Inspection
          .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
          .where(Inspection.site_status == 'Noncompliance')
