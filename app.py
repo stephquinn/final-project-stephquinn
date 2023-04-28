@@ -51,16 +51,11 @@ class Action(Model):
         table_name = "actions"
         database = db
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
+
 #define variables to be displayed on index page
-#maybe add "significant noncompliance" and other noncompliance categories
+#maybe eventually add "significant noncompliance" and other noncompliance categories
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        search_term = request.form['search_term']
-        results = (Action.select(Action, ActionIndex.rank()).join(MinuteIndex,on=(Minute.id == MinuteIndex.rowid)).where(MinuteIndex.match(search_term)).order_by(MinuteIndex.rank()))
-
-
-
     inspection_count = Inspection.select().count()
     recent_inspections = Inspection.select().order_by(Inspection.inspection_date.desc()).limit(10)
     most_violations = (Inspection
@@ -71,6 +66,13 @@ def index():
     template = "index.html"
     return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations)
    
+@app.route('/county/<slug>')
+def detail(slug):
+    county = slug
+    inspections = Inspection.select().where(Inspection.county==slug)
+    actions = Action.select().where(Action.county==slug)
+    return render_template("detail.html", county=county, inspections=inspections, actions=actions)
+    
 
 if __name__ == '__main__':
     # Fire up the Flask test server
