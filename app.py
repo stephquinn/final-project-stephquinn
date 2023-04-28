@@ -41,7 +41,7 @@ class Action(Model):
     city_state_zip = CharField()
     county = CharField()
     enforcement_action = CharField()
-    enforcement_action_no = CharField()
+    enforcement_action_number = CharField()
     enforcement_action_issued = DateTimeField()
     case_closed = DateTimeField()
     media = CharField()
@@ -63,23 +63,17 @@ def index():
          .where(Inspection.site_status == 'Noncompliance')
          .group_by(Inspection.county)
          .order_by(fn.COUNT(Inspection.site_status).desc()))
+    all_counties = (Inspection.select(Inspection.county).distinct())
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations)
+    return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations, all_counties=all_counties)
    
 @app.route('/county/<slug>')
 def detail(slug):
     county = slug
     inspections = Inspection.select().where(Inspection.county==slug)
     actions = Action.select().where(Action.county==slug)
-    events_count = (Inspection.select(fn.SUM(Inspection.inspections).alias('sum'))
-                    .where(Inspection.county==slug)
-                    .scalar() 
-                    + Action.select(fn.SUM(Action.actions).alias('sum'))
-                    .where(Action.county==slug)
-                    .scalar())
+    events_count = len(Action.select().where(Action.county==slug)) + len(Inspection.select().where(Inspection.county==slug))
     return render_template("detail.html", county=county, inspections=inspections, actions=actions, events_count=events_count)
-
-  
 
 if __name__ == '__main__':
     # Fire up the Flask test server

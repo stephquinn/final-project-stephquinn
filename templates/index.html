@@ -12,10 +12,10 @@
         <p>There are {{ inspection_count }} inspections in the database.</p>
 
         <ul>
-        {% for each in most_violations %}
-          <li>{{ each.county }}: {{ each.count }}</li>
-        {% endfor %}
-    </ul>
+            {% for each in most_violations %}
+            <li><a href="/county/{{ each.county }}">{{ each.county }}</a>: {{ each.count }}</li>
+            {% endfor %}
+        </ul>
         <table border=1 cellpadding=7>
             <tr>
                 <th>Document</th>
