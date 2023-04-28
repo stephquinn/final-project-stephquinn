@@ -71,8 +71,15 @@ def detail(slug):
     county = slug
     inspections = Inspection.select().where(Inspection.county==slug)
     actions = Action.select().where(Action.county==slug)
-    return render_template("detail.html", county=county, inspections=inspections, actions=actions)
-    
+    events_count = (Inspection.select(fn.SUM(Inspection.inspections).alias('sum'))
+                    .where(Inspection.county==slug)
+                    .scalar() 
+                    + Action.select(fn.SUM(Action.actions).alias('sum'))
+                    .where(Action.county==slug)
+                    .scalar())
+    return render_template("detail.html", county=county, inspections=inspections, actions=actions, events_count=events_count)
+
+  
 
 if __name__ == '__main__':
     # Fire up the Flask test server
