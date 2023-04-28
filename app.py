@@ -57,7 +57,6 @@ class Action(Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     inspection_count = Inspection.select().count()
-    recent_inspections = Inspection.select().order_by(Inspection.inspection_date.desc()).limit(10)
     most_violations = (Inspection
          .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
          .where(Inspection.site_status == 'Noncompliance')
@@ -65,7 +64,7 @@ def index():
          .order_by(fn.COUNT(Inspection.site_status).desc()))
     all_counties = (Inspection.select(Inspection.county).distinct())
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, recent_inspections = recent_inspections, most_violations=most_violations, all_counties=all_counties)
+    return render_template(template, inspection_count=inspection_count, most_violations=most_violations, all_counties=all_counties)
    
 @app.route('/county/<slug>')
 def detail(slug):

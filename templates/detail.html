@@ -1,19 +1,89 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <title>County: {{ county }}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-  </head>
-  <body>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Counties</a>
-      </nav>
-      <div class="jumbotron">
+    </nav>
+    <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4">{{ county }}</h1>
-          <p class="lead">This county has {{ events_count }} total inspections and enforcement actions.</p>
+            <h1 class="display-4">{{ county }}</h1>
+            <p class="lead">This county has {{ events_count }} total inspections and enforcement actions.</p>
+            <table border=1 cellpadding=7>
+                <h2>Inspections</h2>
+                <tr>
+                    <th>Documents</th>
+                    <th>Site Number</th>
+                    <th>Site Name</th>
+                    <th>Location</th>
+                    <th>Inspection Type</th>
+                    <th>Inspection Date</th>
+                    <th>Permit Number</th>
+                    <th>NPDES Number</th>
+                    <th>Complaint Tracking Number</th>
+                    <th>Inspection Reason</th>
+                    <th>Site Status</th>
+                    <th>Site Condition</th>
+                    <th>Recommended Actions</th>
+                    <th>Compliance Assist?</th>
+                </tr>
+                {% for inspection in inspections %}
+                <tr>
+                    <td>{{ inspection.document }}</td>
+                    <td>{{ inspection.site_no }}</td>
+                    <td>{{ inspection.site_name }}</td>
+                    <td>{{ inspection.city_state_zip }}</td>
+                    <td>{{ inspection.inspection_type }}</td>
+                    <td>{{ inspection.inspection_date }}</td>
+                    <td>{{ inspection.permit_no }}</td>
+                    <td>{{ inspection.npdes_no }}</td>
+                    <td>{{ inspection.complaint_tracking_no }}</td>
+                    <td>{{ inspection.inspection_reason }}</td>
+                    <td>{{ inspection.site_status }}</td>
+                    <td>{{ inspection.site_condition }}</td>
+                    <td>{{ inspection.recommended_actions }}</td>
+                    <td>{{ inspection.compliance_assist }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <table border=1 cellpadding=7>
+                <h2>Enforcement Actions</h2>
+                <tr>
+                    <th>Documents</th>
+                    <th>Site Number</th>
+                    <th>Site Name</th>
+                    <th>Location</th>
+                    <th>Enforcement Action</th>
+                    <th>Enforcement Action Number</th>
+                    <th>Enforcement Action Issued</th>
+                    <th>Case Closed</th>
+                    <th>Media</th>
+                    <th>Program</th>
+                </tr>
+                {% for action in actions %}
+                <tr>
+                    <td>{{ action.document }}</td>
+                    <td>{{ action.site_no }}</td>
+                    <td>{{ action.site_name }}</td>
+                    <td>{{ action.city_state_zip }}</td>
+                    <td>{{ action.enforcement_action }}</td>
+                    <td>{{ action.enforcement_action_number }}</td>
+                    <td>{{ action.enforcement_action_issued }}</td>
+                    <td>{{ action.case_closed }}</td>
+                    <td>{{ action.media }}</td>
+                    <td>{{ action.program }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-      </div>
     </div>
-  </body>
+    </div>
+</body>
+
 </html>
