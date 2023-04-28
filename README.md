@@ -1,16 +1,16 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10834836)
 # final-project
 
-primary_key = CompositeKey('ai_id', 'fir_inspection_date')
+4/28 update: I accomplished a lot this week! What I have right now is:
+- an index page that lists Maryland counties in order of most violations to least, with the numbers of violation for each county and each county name linked to its detail page 
+- the index page also has a search bar allowing the user to pull up a detail page for any county.
+- detail pages that display the number of events (inspections and enforcement actions) for that county, as well as tables showing inspections and enforcement actions in the county
+
+I got the data on the page! I feel like I had a breakthrough this week.
+
+Right now, my app allows users to search for WSA inspections and enforcement actions by county. Although it occurs to me that since there aren't that many counties in Maryland the search bar might be more useful if it allowed people to search by zip code, or maybe if it were a full text search?
 
 
-4/28 update: What I envision is an index page that lists the top ten zipcodes in Maryland with the most violations in the current month - and a search bar allowing the user to pull up a detail page for any zipcode in Maryland.
-
-The detail page would then list all inspections (whether they resulted in violations or not) and enforcement actions in that zipcode, with an individual table for each site. 
-
-A first step would be to separate my current city/state/zip column into one city column and one zip column.
-
-Will I only ever be able to show the most recent 1000 inspections? Because that kind of ruins the premise of my app.
 
 4/21 update: My main goal this week was to write code to load data from the WSA inspections table and display it in table form - which I have more or less done, with a lot of help. Since I know that my final product will use data from both the inspections and enforcement actions tables, I described the column names and datatypes for both in my app.py file, and my data bash file loads data from both tables. That said, I am currently only displaying data from the inspections table, because I need to look more closely at my data to figure out how I want to use data from the actions table.
 
