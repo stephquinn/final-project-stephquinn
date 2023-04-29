@@ -7,6 +7,10 @@
 
 I got the data on the page! I feel like I had a breakthrough this week.
 
+Some relatively simple things to do: 
+- Add "significant compliance" and other "out of compliance" categories to filter on index page.
+- Display table results in chronological order.
+
 Right now, my app allows users to search for WSA inspections and enforcement actions by county. Although it occurs to me that since there aren't that many counties in Maryland the search bar might be more useful if it allowed people to search by zip code, or maybe if it were a full text search? That way, if users were curious about a particular site or the immediate vicinity of where they live, they could find relevant results quickly.
 
 I'd like to work on how data is displayed on the detail page. Right now, it's pretty difficult to parse the results, especially for counties that have the most inspections and enforcement actions. Also, right now the inspections and enforcement actions are displayed separately. Eventually I want people to be able to trace the relationship between inspections and enforcement actions. What if I display the inspections and enforcement actions as one table, in chronological order, on the county detail page, and from the county detail page, give users the option of clicking on a site name to see its history of inspections and enforcement actions on another detail page? Is that too many detail pages?

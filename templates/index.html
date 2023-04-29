@@ -8,10 +8,11 @@
 
 <body>
     <div class="container">
-        <h1>Maryland Water and Science Administration Inspections</h1>
+        <h1>Maryland Water and Science Administration Inspection Outcomes</h1>
         <p>There are {{ inspection_count }} inspections in the database.</p>
 
         <ul>
+            <h2>Counties  </h2>
             {% for each in most_violations %}
             <li><a href="/county/{{ each.county }}">{{ each.county }}</a>: {{ each.count }}</li>
             {% endfor %}
