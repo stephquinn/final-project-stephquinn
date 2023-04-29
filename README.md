@@ -17,7 +17,7 @@ I'd like to work on how data is displayed on the detail page. Right now, it's pr
 
 Looking back at my original vision for the app, I'm also reminded of the filter bar here: https://opendata.maryland.gov/stories/s/iape-ym8p. Would it be really hard to build that?
 
-Next week I might focus on adding full-text search to the index page, enabling users to click to an additional detail page listing inspections and actions for individual sites - and possibly making the app look a little better.
+Next week I might focus on adding full-text search to the index page, as well as enabling users to click to an additional detail page listing inspections and actions for individual sites.
 
 --
 
