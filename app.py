@@ -57,14 +57,24 @@ class Action(Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     inspection_count = Inspection.select().count()
-    most_violations = (Inspection
+    significant_noncompliance = (Inspection
+         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
+         .where(Inspection.site_status == 'Significant Noncompliance')
+         .group_by(Inspection.county)
+         .order_by(fn.COUNT(Inspection.site_status).desc()))
+    noncompliance = (Inspection
          .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
          .where(Inspection.site_status == 'Noncompliance')
          .group_by(Inspection.county)
          .order_by(fn.COUNT(Inspection.site_status).desc()))
+    #total_county_inspections = (Inspection
+         #.select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
+         #.where(Inspection.site_status == 'Significant Noncompliance')
+         #.group_by(Inspection.county)
+         #.order_by(fn.COUNT(Inspection.site_status).desc()))
     all_counties = (Inspection.select(Inspection.county).distinct())
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, most_violations=most_violations, all_counties=all_counties)
+    return render_template(template, inspection_count=inspection_count, noncompliance=noncompliance, significant_noncompliance=significant_noncompliance, all_counties=all_counties)
    
 @app.route('/county/<slug>')
 def detail(slug):
