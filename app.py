@@ -53,28 +53,30 @@ class Action(Model):
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 
 #define variables to be displayed on index page
-#maybe eventually add "significant noncompliance" and other noncompliance categories
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    inspection_count = Inspection.select().count()
     significant_noncompliance = (Inspection
-         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
+         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('sig_count'))
          .where(Inspection.site_status == 'Significant Noncompliance')
          .group_by(Inspection.county)
          .order_by(fn.COUNT(Inspection.site_status).desc()))
     noncompliance = (Inspection
-         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
+         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('non_count'))
          .where(Inspection.site_status == 'Noncompliance')
          .group_by(Inspection.county)
          .order_by(fn.COUNT(Inspection.site_status).desc()))
-    #total_county_inspections = (Inspection
-         #.select(Inspection.county, fn.COUNT(Inspection.site_status).alias('count'))
-         #.where(Inspection.site_status == 'Significant Noncompliance')
-         #.group_by(Inspection.county)
-         #.order_by(fn.COUNT(Inspection.site_status).desc()))
-    all_counties = (Inspection.select(Inspection.county).distinct())
+    total_county_inspections = (Inspection
+        .select(Inspection.county, fn.COUNT().alias('total_count'))
+        .group_by(Inspection.county)
+        .order_by(fn.COUNT().desc()))
+    union_query = (significant_noncompliance
+               .select(significant_noncompliance.county.alias('county_display'), significant_noncompliance.sig_count.alias('sig_count'))
+               .union(noncompliance.select(noncompliance.county, noncompliance.non_count.alias('non_count')))
+               .union(total_county_inspections.select(total_county_inspections.county, total_county_inspections.total_count.alias('total_count')))
+               .order_by(significant_noncompliance.sig_count.desc()))
+    inspection_count = Inspection.select().count()
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, noncompliance=noncompliance, significant_noncompliance=significant_noncompliance, all_counties=all_counties)
+    return render_template(template, inspection_count=inspection_count, noncompliance=noncompliance, significant_noncompliance=significant_noncompliance, total_county_inspections=total_county_inspections, union_query=union_query)
    
 @app.route('/county/<slug>')
 def detail(slug):

@@ -12,16 +12,26 @@
         <p>There are a total of {{ inspection_count }} inspections since 2016 in the database.</p>
 
         <ul>
-            <h2>Cases of Significant Noncompliance by County</h2>
-            {% for each in significant_noncompliance %}
-            <li><a href="/county/{{ each.county }}">{{ each.county }}</a>: {{ each.count }}</li>
-            {% endfor %}
-        </ul>
-        <ul>
-            <h2>Cases of Noncompliance by County</h2>
-            {% for each in noncompliance %}
-            <li><a href="/county/{{ each.county }}">{{ each.county }}</a>: {{ each.count }}</li>
-            {% endfor %}
+            <h2>Outcomes by County</h2>
+            <table border=1 cellpadding=7>
+                <tr>
+                    <th>County</th>
+                    <th>Significant Noncompliance</th>
+                    <th>Noncompliance</th>
+                    <th>Total Inspections</th>
+                </tr>
+                {% for each in union_query %}
+                <tr>
+                    <td>{{ county_display }}</td>
+                    <td>{{ sig_count }}</td>
+                    <td>{{ non_count }}</td>
+                    <td>{{ total_count }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <!--{% for county in union_query %}
+            <li><a href="/county/{{ each.county_display }}">{{ each.county_display }}</a>: {{ each.count }}</li>
+            {% endfor %}-->
         </ul>
     </div>
 </body>
