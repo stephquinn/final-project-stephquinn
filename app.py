@@ -32,6 +32,8 @@ class Inspection(Model):
         table_name = "inspections"
         database = db
         primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
+db.connect()
+db.create_tables([Inspection]) 
 
 #define column names and data types for my actions table
 class Action(Model):
@@ -53,8 +55,9 @@ class Action(Model):
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 
 #define variables to be displayed on index page
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
+    inspection_count = Inspection.select().count()
     significant_noncompliance = (Inspection
          .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('sig_count'))
          .where(Inspection.site_status == 'Significant Noncompliance')
@@ -74,9 +77,8 @@ def index():
                .union(noncompliance.select(noncompliance.county, noncompliance.non_count.alias('non_count')))
                .union(total_county_inspections.select(total_county_inspections.county, total_county_inspections.total_count.alias('total_count')))
                .order_by(significant_noncompliance.sig_count.desc()))
-    inspection_count = Inspection.select().count()
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, noncompliance=noncompliance, significant_noncompliance=significant_noncompliance, total_county_inspections=total_county_inspections, union_query=union_query)
+    return render_template(template, inspection_count=inspection_count, union_query=union_query)
    
 @app.route('/county/<slug>')
 def detail(slug):
