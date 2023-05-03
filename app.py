@@ -54,31 +54,23 @@ class Action(Model):
         database = db
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 
+class CountyInspectionTotal(Model):
+    county = CharField()
+    sig_count = IntegerField()
+    non_count = IntegerField()
+    total_count = IntegerField()
+
+    class Meta:
+        table_name = "county_inspection_totals"
+        database = db
+
 #define variables to be displayed on index page
 @app.route('/')
 def index():
     inspection_count = Inspection.select().count()
-    significant_noncompliance = (Inspection
-         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('sig_count'))
-         .where(Inspection.site_status == 'Significant Noncompliance')
-         .group_by(Inspection.county)
-         .order_by(fn.COUNT(Inspection.site_status).desc()))
-    noncompliance = (Inspection
-         .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('non_count'))
-         .where(Inspection.site_status == 'Noncompliance')
-         .group_by(Inspection.county)
-         .order_by(fn.COUNT(Inspection.site_status).desc()))
-    total_county_inspections = (Inspection
-        .select(Inspection.county, fn.COUNT().alias('total_count'))
-        .group_by(Inspection.county)
-        .order_by(fn.COUNT().desc()))
-    union_query = (significant_noncompliance
-               .select(significant_noncompliance.county.alias('county_display'), significant_noncompliance.sig_count.alias('sig_count'))
-               .union(noncompliance.select(noncompliance.county, noncompliance.non_count.alias('non_count')))
-               .union(total_county_inspections.select(total_county_inspections.county, total_county_inspections.total_count.alias('total_count')))
-               .order_by(significant_noncompliance.sig_count.desc()))
+    county_totals = CountyInspectionTotal.select().order_by(CountyInspectionTotal.sig_count.desc())
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, union_query=union_query)
+    return render_template(template, inspection_count=inspection_count, county_totals=county_totals)
    
 @app.route('/county/<slug>')
 def detail(slug):
@@ -86,6 +78,7 @@ def detail(slug):
     inspections = Inspection.select().where(Inspection.county==slug)
     actions = Action.select().where(Action.county==slug)
     events_count = len(Action.select().where(Action.county==slug)) + len(Inspection.select().where(Inspection.county==slug))
+    
     return render_template("detail.html", county=county, inspections=inspections, actions=actions, events_count=events_count)
 
 if __name__ == '__main__':

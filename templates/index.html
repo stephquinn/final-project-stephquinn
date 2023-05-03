@@ -20,12 +20,12 @@
                     <th>Noncompliance</th>
                     <th>Total Inspections</th>
                 </tr>
-                {% for each in union_query %}
+                {% for county in county_totals %}
                 <tr>
-                    <td>{{ county_display }}</td>
-                    <td>{{ sig_count }}</td>
-                    <td>{{ non_count }}</td>
-                    <td>{{ total_count }}</td>
+                    <td>{{ county.county }}</td>
+                    <td>{{ county.sig_count }}</td>
+                    <td>{{ county.non_count }}</td>
+                    <td>{{ county.total_count }}</td>
                 </tr>
                 {% endfor %}
             </table>
