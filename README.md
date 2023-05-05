@@ -3,7 +3,7 @@
 
 5/5 update:
 
-reverse chron tables for inspections and actions
+reverse chron tables for inspections and actions - why do I seemingly not have actual reverse chron order?
 put totals of inspections and actions at the top
 then there could be a second detail page showing ALL the inspections for the county or ALL the actions for the county
 /county/slug/inspections

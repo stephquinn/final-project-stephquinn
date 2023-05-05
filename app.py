@@ -32,14 +32,12 @@ class Inspection(Model):
         table_name = "inspections"
         database = db
         primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
-db.connect()
-db.create_tables([Inspection]) 
 
 #define column names and data types for my actions table
 class Action(Model):
     document = CharField()
     site_no = IntegerField()
-    site_name = CharField
+    site_name = CharField()
     city_state_zip = CharField()
     county = CharField()
     enforcement_action = CharField()
@@ -75,8 +73,8 @@ def index():
 @app.route('/county/<slug>')
 def detail(slug):
     county = slug
-    inspections = Inspection.select().where(Inspection.county==slug).limit(10)
-    actions = Action.select().where(Action.county==slug).limit(10)
+    inspections = Inspection.select().where(Inspection.county==slug).order_by(Inspection.inspection_date.desc()).limit(10)
+    actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
     inspections_count = len(Inspection.select().where(Inspection.county==slug))
     actions_count = len(Action.select().where(Action.county==slug))
     return render_template("detail.html", county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
