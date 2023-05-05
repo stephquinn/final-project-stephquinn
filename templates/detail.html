@@ -14,7 +14,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-4">{{ county }} County</h1>
-            <p class="lead">This zipcode has {{ events_count }} total inspections and enforcement actions.</p>
+            <p class="lead">This county has {{ inspections_count }} total inspections and {{ actions_count }} enforcement actions.</p>
             <table border=1 cellpadding=7>
                 <h2>Inspections</h2>
                 <tr>
@@ -41,7 +41,6 @@
             <table border=1 cellpadding=7>
                 <h2>Enforcement Actions</h2>
                 <tr>
-                    <th>Documents</th>
                     <th>Site Number</th>
                     <th>Site Name</th>
                     <th>Location</th>
@@ -54,7 +53,6 @@
                 </tr>
                 {% for action in actions %}
                 <tr>
-                    <td>{{ action.document }}</td>
                     <td>{{ action.site_no }}</td>
                     <td>{{ action.site_name }}</td>
                     <td>{{ action.city_state_zip }}</td>

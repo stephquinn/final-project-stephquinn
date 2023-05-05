@@ -75,11 +75,11 @@ def index():
 @app.route('/county/<slug>')
 def detail(slug):
     county = slug
-    inspections = Inspection.select().where(Inspection.county==slug)
-    actions = Action.select().where(Action.county==slug)
-    events_count = len(Action.select().where(Action.county==slug)) + len(Inspection.select().where(Inspection.county==slug))
-    
-    return render_template("detail.html", county=county, inspections=inspections, actions=actions, events_count=events_count)
+    inspections = Inspection.select().where(Inspection.county==slug).limit(10)
+    actions = Action.select().where(Action.county==slug).limit(10)
+    inspections_count = len(Inspection.select().where(Inspection.county==slug))
+    actions_count = len(Action.select().where(Action.county==slug))
+    return render_template("detail.html", county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
 if __name__ == '__main__':
     # Fire up the Flask test server
