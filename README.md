@@ -2,8 +2,8 @@
 # final-project
 
 5/5 update:
-
-I didn't manage to change the date format so I could get the results in the two tables on my detail page to display in reverse chronological order. I commented out the code I tried in my aggregates.py file.
+This week, I managed to put totals of inspections and enforcement actions at the top of my detail page
+I didn't manage to change the date format so I could get the results in the two tables on my detail page to display in reverse chronological order. 
 
 reverse chron tables for inspections and actions - why do I seemingly not have actual reverse chron order? are my dates not actually in date format or something?
 put totals of inspections and actions at the top
