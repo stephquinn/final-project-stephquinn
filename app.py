@@ -18,7 +18,7 @@ class Inspection(Model):
     city_state_zip = CharField()
     county = CharField()
     inspection_type = CharField()
-    inspection_date = DateTimeField()
+    inspection_date = DateField()
     permit_no = CharField()
     npdes_no = CharField()
     complaint_tracking_no = CharField()

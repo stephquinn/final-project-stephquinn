@@ -10,7 +10,7 @@ class Inspection(Model):
     city_state_zip = CharField()
     county = CharField()
     inspection_type = CharField()
-    inspection_date = DateTimeField()
+    inspection_date = DateField()
     permit_no = CharField()
     npdes_no = CharField()
     complaint_tracking_no = CharField()
@@ -24,14 +24,6 @@ class Inspection(Model):
         table_name = "inspections"
         database = db
         primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
-
-inspections = Inspection.select()
-for inspection in inspections:
-    inspection_date = datetime.datetime.strptime(inspection.inspection_date, '%m/%d/%Y')
-    new_date_string = inspection_date.strftime('%Y-%m-%d')
-    inspection.inspection_date = new_date_string
-    inspection.save()
-
 
 class CountyInspectionTotal(Model):
     county = CharField()
