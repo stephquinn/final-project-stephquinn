@@ -1,3 +1,4 @@
+import datetime
 from peewee import *
 
 db = SqliteDatabase('wsa.db')
@@ -24,6 +25,14 @@ class Inspection(Model):
         database = db
         primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
 
+inspections = Inspection.select()
+for inspection in inspections:
+    inspection_date = datetime.datetime.strptime(inspection.inspection_date, '%m/%d/%Y')
+    new_date_string = inspection_date.strftime('%Y-%m-%d')
+    inspection.inspection_date = new_date_string
+    inspection.save()
+
+
 class CountyInspectionTotal(Model):
     county = CharField()
     sig_count = IntegerField()
@@ -35,6 +44,7 @@ class CountyInspectionTotal(Model):
         database = db
 
 db.create_tables([CountyInspectionTotal])
+
 
 # Query all the distinct counties
 counties = Inspection.select(Inspection.county).distinct()
