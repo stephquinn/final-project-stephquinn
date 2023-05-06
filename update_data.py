@@ -20,6 +20,8 @@ df = pd.read_csv("static/actions.csv", na_values=["NA"])
 
 df["enforcement_action_issued"] = pd.to_datetime(df["enforcement_action_issued"], errors="coerce")
 df["enforcement_action_issued"] = df["enforcement_action_issued"].dt.strftime("%Y-%m-%d")
+df["case_closed"] = pd.to_datetime(df["case_closed"], errors="coerce")
+df["case_closed"] = df["case_closed"].dt.strftime("%Y-%m-%d")
 
 # Save the updated CSV file
 df.to_csv("static/actions2.csv", index=False)

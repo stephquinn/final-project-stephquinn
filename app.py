@@ -42,8 +42,8 @@ class Action(Model):
     county = CharField()
     enforcement_action = CharField()
     enforcement_action_number = CharField()
-    enforcement_action_issued = DateTimeField()
-    case_closed = DateTimeField()
+    enforcement_action_issued = DateField()
+    case_closed = DateField()
     media = CharField()
     program = CharField()
 #name the table and set primary key
