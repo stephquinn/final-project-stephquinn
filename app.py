@@ -26,7 +26,7 @@ class Inspection(Model):
     site_condition = CharField()
     recommended_actions = TextField()
     compliance_assist = BooleanField()
-    slug
+    slug = CharField()
 #name the table and set primary key
     class Meta:
         table_name = "inspections"
@@ -46,6 +46,7 @@ class Action(Model):
     case_closed = DateField()
     media = CharField()
     program = CharField()
+    slug = CharField()
 
     class Meta:
         table_name = "actions"
