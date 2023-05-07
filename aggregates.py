@@ -19,6 +19,7 @@ class Inspection(Model):
     site_condition = CharField()
     recommended_actions = TextField()
     compliance_assist = BooleanField()
+    slug = CharField()
 
     class Meta:
         table_name = "inspections"
@@ -30,6 +31,7 @@ class CountyInspectionTotal(Model):
     sig_count = IntegerField()
     non_count = IntegerField()
     total_count = IntegerField()
+    slug = CharField()
 
     class Meta:
         table_name = "county_inspection_totals"
