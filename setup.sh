@@ -1,1 +1,1 @@
-pip install Flask requests peewee sqlite-utils datetime pandas slugify
+pip install Flask requests peewee sqlite-utils datetime pandas python-slugify
