@@ -2,17 +2,24 @@
 # final-project
 
 5/5 update:
-This week, I managed to put totals of inspections and enforcement actions at the top of my detail page
-I didn't manage to change the date format so I could get the results in the two tables on my detail page to display in reverse chronological order. 
-This week I 
+Things to fix/change:
+1. Make sure I've added slug columns to all my tables (compliance and actions csv files and their corresponding models plus CountyInspectionTotals model) and that the slug values are in the correct column.
+2. Display correct numbers of "significant noncompliance" inspections for each county on index page. This means calculating these numbers correctly on aggregates.py and getting them to display on the index page.
+3. Define routes and variables needed to display index, county detail, inspections detail and actions detail pages.
+4. Write code so that slug refers to the county represented on the county detail page, so that actions and inspections detail pages populate the tables for those page with the data. (Is this by correctly defining the href in the templates?)
+5. Do I need two separate update_date.py and aggregates.py pages? Can any of this be put in the same file?
 
+This was how I got the tables on my county detail page to display in reverse chronological order:
 I was having trouble getting the tables on my detail page to display in reverse chronological order. The changes you sent me using the csv module worked for the inspections table, but not for the actions table. For the actions table, I think it didn't work because of the NAs in the date column. ChatGPT gave me a possible solution (adding this: if row['enforcement_action_issued'] != 'NA':) that for some reason worked for some but not all of the rows with NAs, and then it recommended pandas as an alternative. This worked! So now my tables are in reverse chronological order.
 
-
+This was my original to-do list for this week:
 put totals of inspections and actions at the top
 then there could be a second detail page showing ALL the inspections for the county or ALL the actions for the county
 /county/slug/inspections
 /county/slug/actions
+
+Regarding look and feel, I'm shooting for basic, clean design and consistency across pages. It might be good to do more to highlight the most important elements on the page. For instance, I could probably make the text delivering important information about numbers of violations bigger. Maybe numbers of significant violations could be in bold on the index page?
+
 
 4/28 update: I accomplished a lot this week! What I have right now is:
 - an index page that lists Maryland counties in order of most violations to least, with the numbers of violation for each county and each county name linked to its detail page 
