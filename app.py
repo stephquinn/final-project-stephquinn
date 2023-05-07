@@ -26,6 +26,7 @@ class Inspection(Model):
     site_condition = CharField()
     recommended_actions = TextField()
     compliance_assist = BooleanField()
+    slug
 #name the table and set primary key
     class Meta:
         table_name = "inspections"

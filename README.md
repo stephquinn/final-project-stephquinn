@@ -2,6 +2,7 @@
 # final-project
 
 5/5 update:
+This week I 
 
 I was having trouble getting the tables on my detail page to display in reverse chronological order. The changes you sent me using the csv module worked for the inspections table, but not for the actions table. For the actions table, I think it didn't work because of the NAs in the date column. ChatGPT gave me a possible solution (adding this: if row['enforcement_action_issued'] != 'NA':) that for some reason worked for some but not all of the rows with NAs, and then it recommended pandas as an alternative. This worked! So now my tables are in reverse chronological order.
 
