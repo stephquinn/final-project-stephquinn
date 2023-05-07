@@ -4,7 +4,6 @@ import requests
 import json
 from flask import Flask
 from flask import render_template
-from arrow import Arrow
 app = Flask(__name__)
 
 #create a Sqlite database to hold my tables (one for inspections and one for enforcement actions)
@@ -18,7 +17,7 @@ class Inspection(Model):
     city_state_zip = CharField()
     county = CharField()
     inspection_type = CharField()
-    inspection_date = DateTimeField()
+    inspection_date = DateField()
     permit_no = CharField()
     npdes_no = CharField()
     complaint_tracking_no = CharField()
@@ -27,6 +26,7 @@ class Inspection(Model):
     site_condition = CharField()
     recommended_actions = TextField()
     compliance_assist = BooleanField()
+    slug
 #name the table and set primary key
     class Meta:
         table_name = "inspections"
@@ -42,11 +42,11 @@ class Action(Model):
     county = CharField()
     enforcement_action = CharField()
     enforcement_action_number = CharField()
-    enforcement_action_issued = DateTimeField()
-    case_closed = DateTimeField()
+    enforcement_action_issued = DateField()
+    case_closed = DateField()
     media = CharField()
     program = CharField()
-#name the table and set primary key
+
     class Meta:
         table_name = "actions"
         database = db
