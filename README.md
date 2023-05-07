@@ -2,15 +2,12 @@
 # final-project
 
 5/5 update:
-<<<<<<< HEAD
 This week, I managed to put totals of inspections and enforcement actions at the top of my detail page
 I didn't manage to change the date format so I could get the results in the two tables on my detail page to display in reverse chronological order. 
-=======
 This week I 
 
 I was having trouble getting the tables on my detail page to display in reverse chronological order. The changes you sent me using the csv module worked for the inspections table, but not for the actions table. For the actions table, I think it didn't work because of the NAs in the date column. ChatGPT gave me a possible solution (adding this: if row['enforcement_action_issued'] != 'NA':) that for some reason worked for some but not all of the rows with NAs, and then it recommended pandas as an alternative. This worked! So now my tables are in reverse chronological order.
 
->>>>>>> derek
 
 put totals of inspections and actions at the top
 then there could be a second detail page showing ALL the inspections for the county or ALL the actions for the county

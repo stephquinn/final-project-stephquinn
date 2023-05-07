@@ -16,7 +16,7 @@ with open("static/compliance.csv", "r") as file:
 
 with open("static/compliance2.csv", "w") as output:
     writer = csv.writer(output)
-    writer.writerow(["document","site_no","site_name","street_address","city_state_zip","county","slug","inspection_type","inspection_date","permit_no","npdes_no","complaint_tracking_no","inspection_reason","site_status","site_condition","recommended_actions","compliance_assist"])
+    writer.writerow(["document","site_no","site_name","street_address","city_state_zip","county","inspection_type","inspection_date","permit_no","npdes_no","complaint_tracking_no","inspection_reason","site_status","site_condition","recommended_actions","compliance_assist","slug"])
     writer.writerows(rows)
 
 
