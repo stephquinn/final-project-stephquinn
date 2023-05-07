@@ -7,15 +7,6 @@ import re
 
 rows = []
 
-def slugify(text):
-    # Normalizes the text and removes non-ASCII characters
-    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
-    # Removes any character that is not a letter, digit, hyphen, or underscore
-    text = re.sub(r'[^\w\s-]', '', text).strip().lower()
-    # Replaces any whitespace or hyphen with a hyphen
-    text = re.sub(r'[-\s]+', '-', text)
-    return text
-
 with open("static/compliance.csv", "r") as file:
     reader = csv.DictReader(file)
     for row in reader:
