@@ -4,7 +4,6 @@ import requests
 import json
 from flask import Flask
 from flask import render_template
-from arrow import Arrow
 app = Flask(__name__)
 
 #create a Sqlite database to hold my tables (one for inspections and one for enforcement actions)
@@ -46,7 +45,7 @@ class Action(Model):
     case_closed = DateField()
     media = CharField()
     program = CharField()
-#name the table and set primary key
+
     class Meta:
         table_name = "actions"
         database = db
