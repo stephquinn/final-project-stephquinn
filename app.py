@@ -75,24 +75,24 @@ def index():
 @app.route('/county/<slug>')
 def detail(slug):
     county = slug
-    inspections = Inspection.select().where(Inspection.slug).order_by(Inspection.inspection_date.desc()).limit(10)
-    actions = Action.select().where(Action.slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
-    inspections_count = len(Inspection.select().where(Inspection.slug))
-    actions_count = len(Action.select().where(Action.slug))
+    inspections = Inspection.select().where(Inspection.county==slug).order_by(Inspection.inspection_date.desc()).limit(10)
+    actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
+    inspections_count = len(Inspection.select().where(Inspection.county==slug))
+    actions_count = len(Action.select().where(Action.county==slug))
     return render_template("detail.html", county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
 @app.route('/county/<slug>/actions')
 def actions(slug):
     county = slug
-    actions = Action.select().where(Action.slug).order_by(Action.enforcement_action_issued.desc())
-    actions_count = len(Action.select().where(Action.slug))
+    actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc())
+    actions_count = len(Action.select().where(Action.county==slug))
     return render_template("actions.html", county=county, actions=actions, actions_count=actions_count)
 
 @app.route('/county/<slug>/inspections')
 def inspections(slug): 
     county = slug
-    inspections = Inspection.select().where(Inspection.slug).order_by(Inspection.inspection_date.desc())
-    inspections_count = len(Inspection.select().where(Inspection.slug))
+    inspections = Inspection.select().where(Inspection.county==slug).order_by(Inspection.inspection_date.desc())
+    inspections_count = len(Inspection.select().where(Inspection.county==slug))
     return render_template("inspections.html", county=county, inspections=inspections, inspections_count=inspections_count)
 
 if __name__ == '__main__':
