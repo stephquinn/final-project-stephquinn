@@ -85,18 +85,18 @@ def detail(slug):
 @app.route('/county/<slug>/actions')
 def actions(slug):
     slug=slug
-    county = slug
-    slug = Action.county
-    actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc())
-    actions_count = len(Action.select().where(Action.county==slug))
-    return render_template("actions.html", county=county, actions=actions, actions_count=actions_count)
+    actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc())
+    actions_count = len(Action.select().where(Action.slug==slug))
+    county = actions[0].county
+    return render_template("actions.html", county=county, slug=slug, actions=actions, actions_count=actions_count)
 
 @app.route('/county/<slug>/inspections')
 def inspections(slug): 
-    county = slug
-    inspections = Inspection.select().where(Inspection.county==slug).order_by(Inspection.inspection_date.desc())
-    inspections_count = len(Inspection.select().where(Inspection.county==slug))
-    return render_template("inspections.html", county=county, inspections=inspections, inspections_count=inspections_count)
+    slug=slug
+    inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc())
+    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    county = inspections[0].county
+    return render_template("inspections.html", slug=slug, county=county, inspections=inspections, inspections_count=inspections_count)
 
 if __name__ == '__main__':
     # Fire up the Flask test server

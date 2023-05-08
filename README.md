@@ -1,6 +1,8 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10834836)
 # final-project
 
+breadcrumbs?
+
 5/5 update:
 Things to fix/change:
 1. Make sure I've added slug columns to all my tables (compliance and actions csv files and their corresponding models plus CountyInspectionTotals model) and that the slug values are in the correct column.
