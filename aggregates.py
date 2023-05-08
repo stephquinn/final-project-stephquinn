@@ -41,7 +41,7 @@ db.create_tables([CountyInspectionTotal])
 
 
 # Query all the distinct counties
-counties = Inspection.select(Inspection.county).distinct()
+counties = Inspection.select(Inspection.county, Inspection.slug).distinct()
 
 significant_noncompliance = (Inspection
                              .select(Inspection.county, fn.COUNT(Inspection.site_status).alias('sig_count'))
@@ -73,6 +73,7 @@ for county in counties:
     # Insert the aggregated data into the CountyInspectionTotal table
     CountyInspectionTotal.create(
         county=county.county,
+        slug=county.slug,
         sig_count=sig_count,
         non_count=non_count,
         total_count=total_count

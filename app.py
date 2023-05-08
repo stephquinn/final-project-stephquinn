@@ -74,16 +74,19 @@ def index():
    
 @app.route('/county/<slug>')
 def detail(slug):
-    county = slug
-    inspections = Inspection.select().where(Inspection.county==slug).order_by(Inspection.inspection_date.desc()).limit(10)
-    actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
-    inspections_count = len(Inspection.select().where(Inspection.county==slug))
-    actions_count = len(Action.select().where(Action.county==slug))
-    return render_template("detail.html", county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
+    slug = slug
+    inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc()).limit(10)
+    actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
+    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    actions_count = len(Action.select().where(Action.slug==slug))
+    county = inspections[0].county
+    return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
 @app.route('/county/<slug>/actions')
 def actions(slug):
+    slug=slug
     county = slug
+    slug = Action.county
     actions = Action.select().where(Action.county==slug).order_by(Action.enforcement_action_issued.desc())
     actions_count = len(Action.select().where(Action.county==slug))
     return render_template("actions.html", county=county, actions=actions, actions_count=actions_count)

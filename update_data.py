@@ -4,6 +4,7 @@ import pandas as pd
 from slugify import slugify
 import unicodedata
 import re
+from peewee import *
 
 rows = []
 

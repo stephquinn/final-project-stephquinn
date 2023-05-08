@@ -5,6 +5,7 @@ sqlite-utils insert wsa.db inspections static/compliance2.csv --csv
 
 sqlite-utils insert wsa.db actions static/actions2.csv --csv
 
-
+python update_data.py
+python aggregates.py
 
 

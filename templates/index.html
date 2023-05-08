@@ -23,7 +23,7 @@
                 {% for county in county_totals %}
                 {% if county.county not in ['Not Yet Determined', 'Outside of Maryland'] %}
                 <tr>
-                    <td><a href="/county/{{ county.county }}">{{ county.county }}</a></td>
+                    <td><a href="/county/{{ county.slug }}">{{ county.county }}</a></td>
                     <td>{{ county.sig_count }}</td>
                     <td>{{ county.non_count }}</td>
                     <td>{{ county.total_count }}</td>
