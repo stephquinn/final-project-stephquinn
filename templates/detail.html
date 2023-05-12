@@ -2,26 +2,27 @@
 <html>
 
 <head>
-    <title>County: {{ county }}</title>
+    <title>{{ county }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="templates/app.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">WSA Inspection Outcomes
+        <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
     <div class="jumbotron">
         <div class="container">
             <p><a href="/">Home</a> >>> County >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
                     href="/county/{{ slug }}/actions">Actions</a></p>
-            <h1 class="display-4">{{ county }}</h1>
-            <p class="lead">This county has {{ inspections_count }} total
+            <h1 class="display-4">{{ county }} </h1>
+            <p class="lead">The WSA has reported {{ inspections_count }} total
                 <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a href="/county/{{ slug }}/actions">
                     enforcement
-                        actions.</a></p>
+                        actions</a> for this area. Here are the most recent ones.</p>
             <table border=1 cellpadding=7>
-                <h2>Inspections</h2>
+                <h2>Most Recent Inspections</h2>
                 <tr>
                     <th>Site Number</th>
                     <th>Site Name</th>
@@ -44,7 +45,7 @@
                 {% endfor %}
             </table>
             <table border=1 cellpadding=7>
-                <h2>Enforcement Actions</h2>
+                <h2>Most Recent Enforcement Actions</h2>
                 <tr>
                     <th>Site Number</th>
                     <th>Site Name</th>

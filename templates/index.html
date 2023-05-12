@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="templates/app.css">
 </head>
 
 <body>
@@ -13,12 +14,17 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-4">Maryland Water and Science Administration Inspections</h1>
-            <p class="lead">There are a total of {{ inspection_count }} inspections since 2016 in the database.</p>
+            <p class="lead">Inspectors from the WSA's field offices visit sites that discharge wastewater to determine their compliance with their National Pollutant Discharge Elimination System permits and report the results of these inspections to the Maryland Department of the Environment each year.</p>
+            <p class="lead">WSA publishes its compliance inspections <a href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20Compliance">here</a> and its enforcement actions <a href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20EnforcementViolations">here</a>. MDE also releases an <a href="https://mde.maryland.gov/Documents/FY22%20MDE%20Annual%20Enforcement%20and%20Compliance%20Report.pdf">Annual Enforcement & Compliance Report</a> including WSA reported data.</p> 
+            <!--<p class="lead">But because inspection and enforcement data are published separately, state reporting doesn't make it easy to trace inspections and enforcement actions for individual sites.</p>
+            <p class="lead">Where has WSA reported the most instances of significant noncompliance with state and federal water pollution standards? And when do failed inspections result in enforcement actions such as consent orders or fines?</p> 
+            <p class="lead">Use this exploratory tool to find out.</p>-->
+            <p class="lead">The WSA has reported a total of <b>{{ inspection_count }} inspections</b> since 2016. </p>
             <h2>Outcomes by County</h2>
             <table border=1 cellpadding=7>
                 <tr>
                     <th>County</th>
-                    <th>Significant Noncompliance</th>
+                    <th><b>Significant Noncompliance</b></th>
                     <th>Noncompliance</th>
                     <th>Total Inspections</th>
                 </tr>
@@ -26,7 +32,7 @@
                 {% if county.county not in ['Not Yet Determined', 'Outside of Maryland'] %}
                 <tr>
                     <td><a href="/county/{{ county.slug }}">{{ county.county }}</a></td>
-                    <td>{{ county.sig_count }}</td>
+                    <td><b>{{ county.sig_count }}</b></td>
                     <td>{{ county.non_count }}</td>
                     <td>{{ county.total_count }}</td>
                 </tr>

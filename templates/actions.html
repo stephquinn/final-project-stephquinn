@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>Enforcement Actions: {{ county }}</title>
+    <title>{{ county }}: Enforcement Actions</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="templates/app.css">
 </head>
 
 <body>
@@ -13,11 +14,13 @@
     </nav>
     <div class="jumbotron">
         <div class="container">
-            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> Actions</p>
+            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <a
+                    href="/county/{{ slug }}/inspections">Inspections</a> >>> <b>Actions</b></p>
             <h1 class="display-4">Enforcement Actions: <a href="/county/{{ slug }}">{{ county }}</a></h1>
-            <p class="lead">This jurisdiction has {{ actions_count }} total enforcement actions and {{ inspections_count }} total <a href="/county/{{ slug }}/inspections">inspections</a>.</p>
+            <p class="lead">The WSA has reported {{ actions_count }} total enforcement actions for this area. Click <a
+                    href="/county/{{ slug }}/inspections">here</a> for this area's inspections.</p>
             <table border=1 cellpadding=7>
-                <h2>Enforcement Actions</h2>
+                <h2> Enforcement Actions</h2>
                 <tr>
                     <th>Site Number</th>
                     <th>Site Name</th>

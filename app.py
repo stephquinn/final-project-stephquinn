@@ -82,6 +82,13 @@ def detail(slug):
     county = inspections[0].county
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
+@app.route('/site/<slug>')
+def site(slug):
+    slug=site_name
+    inspections_yinglings = Inspection.select().where(Inspection.site_name=="Yinglings Golf Center").order_by(Inspection.inspection_date.desc())
+    print(f"Site {inspection.site_name} had {inspection.inspections}")
+    return render_template("site.html", slug=slug, inspections_yinglings=inspections_yinglings)
+
 @app.route('/county/<slug>/actions')
 def actions(slug):
     slug=slug

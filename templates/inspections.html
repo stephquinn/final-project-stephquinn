@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>Enforcement Actions: {{ county }}</title>
+    <title>{{ county }}: Inspections</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="templates/app.css">
 </head>
 
 <body>
@@ -13,9 +14,9 @@
     </nav>
     <div class="jumbotron">
         <div class="container">
-            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> Inspections >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
+            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b> >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
             <h1 class="display-4">Inspections: <a href="/county/{{ slug }}">{{ county }}</a></h1>
-            <p class="lead">This jurisdiction has {{ inspections_count }} total inspections and {{ actions_count }} total <a href="/county/{{ slug }}/actions">enforcement actions</a>.</p>
+            <p class="lead">This jurisdiction has {{ inspections_count }} total inspections. Click <a href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
             <table border=1 cellpadding=7>
                 <h2>Inspections</h2>
                 <tr>
