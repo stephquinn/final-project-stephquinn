@@ -9,14 +9,17 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
+        <a class="navbar-brand" href="/">WSA Inspection Outcomes
     </nav>
     <div class="jumbotron">
         <div class="container">
+            <p><a href="/">Home</a> >>> County >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
+                    href="/county/{{ slug }}/actions">Actions</a></p>
             <h1 class="display-4">{{ county }}</h1>
-            <p class="lead">This county has {{ inspections_count }} <a href="/county/{{ slug }}/inspections">total
-                    inspections</a> and {{ actions_count }} <a href="/county/{{ slug }}/actions">enforcement
-                    actions</a>.</p>
+            <p class="lead">This county has {{ inspections_count }} total
+                <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a href="/county/{{ slug }}/actions">
+                    enforcement
+                        actions.</a></p>
             <table border=1 cellpadding=7>
                 <h2>Inspections</h2>
                 <tr>

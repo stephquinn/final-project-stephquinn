@@ -13,6 +13,7 @@
     </nav>
     <div class="jumbotron">
         <div class="container">
+            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> Inspections >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
             <h1 class="display-4">Inspections: <a href="/county/{{ slug }}">{{ county }}</a></h1>
             <p class="lead">This jurisdiction has {{ inspections_count }} total inspections and {{ actions_count }} total <a href="/county/{{ slug }}/actions">enforcement actions</a>.</p>
             <table border=1 cellpadding=7>
