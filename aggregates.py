@@ -4,7 +4,6 @@ from peewee import *
 db = SqliteDatabase('wsa.db')
 
 class Inspection(Model):
-    document = CharField()
     site_no = IntegerField()
     site_name = CharField()
     city_state_zip = CharField()

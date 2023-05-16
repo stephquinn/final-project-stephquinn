@@ -11,8 +11,7 @@ db = SqliteDatabase('wsa.db')
 
 #define column names and data types for my inspections table
 class Inspection(Model):
-    document = CharField()
-    site_no = IntegerField()
+    site_no = CharField()
     site_name = CharField()
     city_state_zip = CharField()
     county = CharField()
@@ -36,8 +35,7 @@ class Inspection(Model):
 
 #define column names and data types for my actions table
 class Action(Model):
-    document = CharField()
-    site_no = IntegerField()
+    site_no = CharField()
     site_name = CharField()
     city_state_zip = CharField()
     county = CharField()
@@ -90,7 +88,7 @@ def site(site_no):
     actions_count = len(Action.select().where(Action.site_no==site_no))
     inspections = Inspection.select().where(Inspection.site_no==site_no).order_by(Inspection.inspection_date.desc())
     inspections_count = len(Inspection.select().where(Inspection.site_no==site_no))
-    return render_template("site.html", actions=actions, actions_count=actions_count, inspections=inspections, inspections_count=inspections_count)
+    return render_template("site.html", actions=actions, actions_count=actions_count, inspections=inspections, inspections_count=inspections_count, site_no=site_no)
 
 @app.route('/county/<slug>/actions')
 def actions(slug):

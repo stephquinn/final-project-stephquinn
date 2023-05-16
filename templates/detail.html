@@ -18,9 +18,11 @@
                     href="/county/{{ slug }}/actions">Actions</a></p>
             <h1 class="display-4">{{ county }} </h1>
             <p class="lead">The WSA has reported {{ inspections_count }} total
-                <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a href="/county/{{ slug }}/actions">
+                <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a
+                    href="/county/{{ slug }}/actions">
                     enforcement
-                        actions</a> for this area. Here are the most recent ones.</p>
+                    actions</a> for this area. Here are the most recent ones.
+            </p>
             <table border=1 cellpadding=7>
                 <h2>Most Recent Inspections</h2>
                 <tr>
@@ -33,14 +35,14 @@
                     <th>Recommended Actions</th>
                 </tr>
                 {% for inspection in inspections %}
-                <tr></tr>
-                <td>{{ inspection.site_no }}</td>
-                <td><a href="/site/site_no">{{ inspection.site_name }}</a></td>
-                <td>{{ inspection.city_state_zip }}</td>
-                <td>{{ inspection.inspection_type }}</td>
-                <td>{{ inspection.inspection_date }}</td>
-                <td>{{ inspection.site_status }}</td>
-                <td>{{ inspection.recommended_actions }}</td>
+                <tr>
+                    <td>{{ inspection.site_no }}</td>
+                    <td><a href="/site/site_no">{{ inspection.site_name }}</a></td>
+                    <td>{{ inspection.city_state_zip }}</td>
+                    <td>{{ inspection.inspection_type }}</td>
+                    <td>{{ inspection.inspection_date }}</td>
+                    <td>{{ inspection.site_status }}</td>
+                    <td>{{ inspection.recommended_actions }}</td>
                 </tr>
                 {% endfor %}
             </table>
