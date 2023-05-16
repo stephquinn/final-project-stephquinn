@@ -11,7 +11,8 @@ db = SqliteDatabase('wsa.db')
 
 #define column names and data types for my inspections table
 class Inspection(Model):
-    site_no = CharField()
+    document = CharField()
+    site_no = IntegerField()
     site_name = CharField()
     city_state_zip = CharField()
     county = CharField()
@@ -35,6 +36,7 @@ class Inspection(Model):
 
 #define column names and data types for my actions table
 class Action(Model):
+    document = CharField()
     site_no = CharField()
     site_name = CharField()
     city_state_zip = CharField()
