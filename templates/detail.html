@@ -35,7 +35,7 @@
                 {% for inspection in inspections %}
                 <tr></tr>
                 <td>{{ inspection.site_no }}</td>
-                <td>{{ inspection.site_name }}</td>
+                <td><a href="/site/site_no">{{ inspection.site_name }}</a></td>
                 <td>{{ inspection.city_state_zip }}</td>
                 <td>{{ inspection.inspection_type }}</td>
                 <td>{{ inspection.inspection_date }}</td>

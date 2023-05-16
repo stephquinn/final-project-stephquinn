@@ -26,7 +26,11 @@ df = pd.read_csv("static/actions.csv", na_values=["NA"])
 def create_slug(county):
     return slugify(county)
 
-df["slug"] = df["county"].apply(create_slug)
+def create_slug(site_name):
+    return slugify(site_name)
+
+df["county_slug"] = df["county"].apply(create_slug)
+df["site_slug"] = df["site_name"].apply(create_slug)
 df["enforcement_action_issued"] = pd.to_datetime(df["enforcement_action_issued"], errors="coerce")
 df["enforcement_action_issued"] = df["enforcement_action_issued"].dt.strftime("%Y-%m-%d")
 df["case_closed"] = pd.to_datetime(df["case_closed"], errors="coerce")
@@ -34,5 +38,8 @@ df["case_closed"] = df["case_closed"].dt.strftime("%Y-%m-%d")
 
 # Save the updated CSV file
 df.to_csv("static/actions2.csv", index=False)
+
+
+
 
 

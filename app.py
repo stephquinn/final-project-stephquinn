@@ -27,6 +27,7 @@ class Inspection(Model):
     recommended_actions = TextField()
     compliance_assist = BooleanField()
     slug = CharField()
+
 #name the table and set primary key
     class Meta:
         table_name = "inspections"
@@ -82,16 +83,17 @@ def detail(slug):
     county = inspections[0].county
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
-@app.route('/site/<slug>')
-def site(slug):
-    slug=site_name
-    inspections_yinglings = Inspection.select().where(Inspection.site_name=="Yinglings Golf Center").order_by(Inspection.inspection_date.desc())
-    print(f"Site {inspection.site_name} had {inspection.inspections}")
-    return render_template("site.html", slug=slug, inspections_yinglings=inspections_yinglings)
+@app.route('/site/site_no')
+def site(site_no):
+    actions = Action.select().where(Action.site_no==site_no).order_by(Action.enforcement_action_issued.desc())
+    actions_count = len(Action.select().where(Action.site_no==site_no))
+    inspections = Inspection.select().where(Inspection.site_no==site_no).order_by(Inspection.inspection_date.desc())
+    inspections_count = len(Inspection.select().where(Inspection.site_no==site_no))
+    return render_template("site.html", actions=actions, actions_count=actions_count, inspections=inspections, inspections_count=inspections_count, site_no=site_no)
 
 @app.route('/county/<slug>/actions')
 def actions(slug):
-    slug=slug
+    slug = slug
     actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc())
     actions_count = len(Action.select().where(Action.slug==slug))
     inspections_count = len(Inspection.select().where(Inspection.slug==slug))
@@ -100,7 +102,7 @@ def actions(slug):
 
 @app.route('/county/<slug>/inspections')
 def inspections(slug): 
-    slug=slug
+    slug = slug
     inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc())
     inspections_count = len(Inspection.select().where(Inspection.slug==slug))
     actions_count = len(Action.select().where(Action.slug==slug))
