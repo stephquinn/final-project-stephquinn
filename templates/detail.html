@@ -37,7 +37,7 @@
                 {% for inspection in inspections %}
                 <tr>
                     <td>{{ inspection.site_no }}</td>
-                    <td><a href="/site/site_no">{{ inspection.site_name }}</a></td>
+                    <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
                     <td>{{ inspection.city_state_zip }}</td>
                     <td>{{ inspection.inspection_type }}</td>
                     <td>{{ inspection.inspection_date }}</td>
@@ -61,7 +61,7 @@
                 {% for action in actions %}
                 <tr>
                     <td>{{ action.site_no }}</td>
-                    <td>{{ action.site_name }}</td>
+                    <td><a href="/site/{{ action.site_no }}">{{ action.site_name }}</a></td>
                     <td>{{ action.city_state_zip }}</td>
                     <td>{{ action.enforcement_action }}</td>
                     <td>{{ action.enforcement_action_issued }}</td>
