@@ -83,13 +83,14 @@ def detail(slug):
     county = inspections[0].county
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count)
 
-@app.route('/site/site_no')
+# if i'm capturing a value in a url, it needs to be surrounded by <> in the route
+@app.route('/site/<site_no>')
 def site(site_no):
     actions = Action.select().where(Action.site_no==site_no).order_by(Action.enforcement_action_issued.desc())
     actions_count = len(Action.select().where(Action.site_no==site_no))
     inspections = Inspection.select().where(Inspection.site_no==site_no).order_by(Inspection.inspection_date.desc())
     inspections_count = len(Inspection.select().where(Inspection.site_no==site_no))
-    return render_template("site.html", actions=actions, actions_count=actions_count, inspections=inspections, inspections_count=inspections_count, site_no=site_no)
+    return render_template("site.html", actions=actions, actions_count=actions_count, inspections=inspections, inspections_count=inspections_count)
 
 @app.route('/county/<slug>/actions')
 def actions(slug):
