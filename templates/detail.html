@@ -10,7 +10,8 @@
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Noto+Sans:wght@400;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Noto+Sans:wght@400;700&display=swap"
         rel="stylesheet">
     <!--css-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -23,65 +24,65 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
-        <div class="container">
-            <p><a href="/">Home</a> >>> County >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
-                    href="/county/{{ slug }}/actions">Actions</a></p>
-            <h1 class="display-4">{{ county }} </h1>
-            <p class="lead">The WSA has reported {{ inspections_count }} total
-                <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a
-                    href="/county/{{ slug }}/actions">
-                    enforcement
-                    actions</a> for this area. Here are the most recent ones.
-            </p>
-            <table border=1 cellpadding=7>
-                <h2>Most Recent Inspections</h2>
-                <tr>
-                    <th>Site Number</th>
-                    <th>Site Name</th>
-                    <th>Location</th>
-                    <th>Inspection Type</th>
-                    <th>Inspection Date</th>
-                    <th>Site Status</th>
-                    <th>Recommended Actions</th>
-                </tr>
-                {% for inspection in inspections %}
-                <tr>
-                    <td>{{ inspection.site_no }}</td>
-                    <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
-                    <td>{{ inspection.city_state_zip }}</td>
-                    <td>{{ inspection.inspection_type }}</td>
-                    <td>{{ inspection.inspection_date }}</td>
-                    <td>{{ inspection.site_status }}</td>
-                    <td>{{ inspection.recommended_actions }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <table border=1 cellpadding=7>
-                <h2>Most Recent Enforcement Actions</h2>
-                <tr>
-                    <th>Site Number</th>
-                    <th>Site Name</th>
-                    <th>Location</th>
-                    <th>Enforcement Action</th>
-                    <th>Enforcement Action Issued</th>
-                    <th>Case Closed</th>
-                    <th>Media</th>
-                    <th>Program</th>
-                </tr>
-                {% for action in actions %}
-                <tr>
-                    <td>{{ action.site_no }}</td>
-                    <td><a href="/site/{{ action.site_no }}">{{ action.site_name }}</a></td>
-                    <td>{{ action.city_state_zip }}</td>
-                    <td>{{ action.enforcement_action }}</td>
-                    <td>{{ action.enforcement_action_issued }}</td>
-                    <td>{{ action.case_closed }}</td>
-                    <td>{{ action.media }}</td>
-                    <td>{{ action.program }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+    <div class="container">
+        <p><a href="/">Home</a> >>> County >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
+                href="/county/{{ slug }}/actions">Actions</a></p>
+        <h1>{{ county }} </h1>
+        <p class="lead">The WSA has reported {{ inspections_count }} total
+            <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a
+                href="/county/{{ slug }}/actions">
+                enforcement
+                actions</a> for this area. Here are the most recent ones.
+        </p>
+        <table border=1 cellpadding=7>
+            <h2>Most Recent Inspections</h2>
+            <tr>
+                <th>Site Number</th>
+                <th>Site Name</th>
+                <th>Location</th>
+                <th>Inspection Type</th>
+                <th>Inspection Date</th>
+                <th>Site Status</th>
+                <th>Recommended Actions</th>
+            </tr>
+            {% for inspection in inspections %}
+            <tr>
+                <td>{{ inspection.site_no }}</td>
+                <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
+                <td>{{ inspection.city_state_zip }}</td>
+                <td>{{ inspection.inspection_type }}</td>
+                <td>{{ inspection.inspection_date }}</td>
+                <td>{{ inspection.site_status }}</td>
+                <td>{{ inspection.recommended_actions }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table border=1 cellpadding=7>
+            <h2>Most Recent Enforcement Actions</h2>
+            <tr>
+                <th>Site Number</th>
+                <th>Site Name</th>
+                <th>Location</th>
+                <th>Enforcement Action</th>
+                <th>Enforcement Action Issued</th>
+                <th>Case Closed</th>
+                <th>Media</th>
+                <th>Program</th>
+            </tr>
+            {% for action in actions %}
+            <tr>
+                <td>{{ action.site_no }}</td>
+                <td><a href="/site/{{ action.site_no }}">{{ action.site_name }}</a></td>
+                <td>{{ action.city_state_zip }}</td>
+                <td>{{ action.enforcement_action }}</td>
+                <td>{{ action.enforcement_action_issued }}</td>
+                <td>{{ action.case_closed }}</td>
+                <td>{{ action.media }}</td>
+                <td>{{ action.program }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
     </div>
 </body>
 
