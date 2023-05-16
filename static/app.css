@@ -1,5 +1,27 @@
 body {
     background-color:#DBE3DF;
-    font-family: ;
+    font-family:'Noto Sans', sans-serif;
+    font-size:18px;
+}
+
+.navbar-brand {
+    padding: .5em 2em .5em 2em;
+    font-family:'Merriweather', serif;
+}
+
+h1 {
+    font-family: 'Merriweather', serif;
+    font-size:2em;
+    padding:1em 0em;
+}
+
+h2 {
+    font-family: 'Merriweather', serif;
+    font-size:1.5em;
+    padding:.5em 0em .5em 0em;
+}
+
+table {
+    padding:0em 0em 2em 0em;
 }
 
