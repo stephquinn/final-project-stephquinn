@@ -57,7 +57,7 @@ total_county_inspections = (Inspection
                             .group_by(Inspection.county))
 
 inspection_types = (Inspection
-                            .select(Inspection.inspection_type, fn.COUNT().alias('type_count'))
+                            .select(Inspection.county, fn.COUNT(Inspection.inspection_type).alias('type_count'))
                             .group_by(Inspection.inspection_type)
                             .order_by(fn.COUNT().desc()))
 
@@ -86,6 +86,6 @@ for county in counties:
         sig_count=sig_count,
         non_count=non_count,
         total_count=total_count,
-        inspection_type=inspection_types.county,
-        type_count=type_count
+        inspection_type_name=county.inspection_types,
+        inspection_type_count=type_count
     )
