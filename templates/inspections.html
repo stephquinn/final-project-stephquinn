@@ -3,44 +3,55 @@
 
 <head>
     <title>{{ county }}: Inspections</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--meta-->
+    <title>{{ county }}</title>
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Noto+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!--css-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="templates/app.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
-    <div class="jumbotron">
-        <div class="container">
-            <p><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b> >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
-            <h1 class="display-4">Inspections: <a href="/county/{{ slug }}">{{ county }}</a></h1>
-            <p class="lead">This jurisdiction has {{ inspections_count }} total inspections. Click <a href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
-            <table border=1 cellpadding=7>
-                <h2>Inspections</h2>
-                <tr>
-                    <th>Site Number</th>
-                    <th>Site Name</th>
-                    <th>Location</th>
-                    <th>Inspection Type</th>
-                    <th>Inspection Date</th>
-                    <th>Site Status</th>
-                    <th>Recommended Actions</th>
-                </tr>
-                {% for inspection in inspections %}
-                <tr>
-                    <td>{{ inspection.site_no }}</td>
-                    <td>{{ inspection.site_name }}</td>
-                    <td>{{ inspection.city_state_zip }}</td>
-                    <td>{{ inspection.inspection_type }}</td>
-                    <td>{{ inspection.inspection_date }}</td>
-                    <td>{{ inspection.site_status }}</td>
-                    <td>{{ inspection.recommended_actions }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
+    <div class="container">
+        <p class="breadcrumbs"><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b> >>> <a
+                href="/county/{{ slug }}/actions">Actions</a></p>
+        <h1>Inspections: <a href="/county/{{ slug }}">{{ county }}</a></h1>
+        <p class="lead">This jurisdiction has {{ inspections_count }} total inspections. Click <a
+                href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
+        <table border=1 cellpadding=7>
+            <h2>Inspections</h2>
+            <tr>
+                <th>Site Number</th>
+                <th>Site Name</th>
+                <th>Location</th>
+                <th>Inspection Type</th>
+                <th>Inspection Date</th>
+                <th>Site Status</th>
+                <th>Recommended Actions</th>
+            </tr>
+            {% for inspection in inspections %}
+            <tr>
+                <td>{{ inspection.site_no }}</td>
+                <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
+                <td>{{ inspection.city_state_zip }}</td>
+                <td>{{ inspection.inspection_type }}</td>
+                <td>{{ inspection.inspection_date }}</td>
+                <td>{{ inspection.site_status }}</td>
+                <td>{{ inspection.recommended_actions }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </body>

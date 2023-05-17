@@ -1,5 +1,5 @@
 body {
-    background-color:#DBE3DF;
+    background-color:#A4C2D7;
     font-family:'Noto Sans', sans-serif;
     font-size:18px;
 }
@@ -7,6 +7,10 @@ body {
 .navbar-brand {
     padding: .5em 2em .5em 2em;
     font-family:'Merriweather', serif;
+}
+
+.breadcrumbs {
+    padding-top:1em;
 }
 
 h1 {

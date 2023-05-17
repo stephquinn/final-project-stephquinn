@@ -1,19 +1,33 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
     <title>{{ slug }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--meta-->
+    <title>{{ county }}</title>
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Noto+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!--css-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="templates/app.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
-    <div class="jumbotron">
         <div class="container">
+            <p class="breadcrumbs"><a href="/">Home</a> >>> <b>Site History</b></p>
+            <h1>{{ site_name }}</h1>
+            <p class="lead">This site has had {{ inspections_count }} reported inspections and {{ actions_count }} enforcement actions since 2012.</p>
             <table border=1 cellpadding=7>
                 <h2>Inspections</h2>
                 <tr>
@@ -63,5 +77,4 @@
                 {% endfor %}
             </table>
         </div>
-    </div>
 </body>
