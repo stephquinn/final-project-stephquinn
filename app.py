@@ -60,6 +60,8 @@ class CountyInspectionTotal(Model):
     non_count = IntegerField()
     total_count = IntegerField()
     slug = CharField()
+    inspection_type_name = CharField()
+    inspection_type_count = IntegerField()
 
     class Meta:
         table_name = "county_inspection_totals"

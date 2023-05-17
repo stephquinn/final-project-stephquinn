@@ -32,6 +32,8 @@ class CountyInspectionTotal(Model):
     non_count = IntegerField()
     total_count = IntegerField()
     slug = CharField()
+    inspection_type_name = CharField()
+    inspection_type_count = IntegerField()
 
     class Meta:
         table_name = "county_inspection_totals"
@@ -56,10 +58,10 @@ total_county_inspections = (Inspection
                             .select(Inspection.county, fn.COUNT().alias('total_count'))
                             .group_by(Inspection.county))
 
-inspection_types = (Inspection
-                            .select(Inspection.county, fn.COUNT(Inspection.inspection_type).alias('type_count'))
-                            .group_by(Inspection.inspection_type)
-                            .order_by(fn.COUNT().desc()))
+#inspection_types = (Inspection
+                            #.select(Inspection.county, fn.COUNT(Inspection.inspection_type).alias('type_count'))
+                            #.group_by(Inspection.county)
+                            #.order_by(fn.COUNT().desc()))
 
 # Iterate through the counties and get the aggregate data
 for county in counties:
@@ -75,9 +77,14 @@ for county in counties:
     total_count = total_county_inspections.where(Inspection.county == county.county).first()
     total_count = total_count.total_count if total_count else 0
 
-    # Get the inspection_type count
-    type_count = inspection_types.where(Inspection.county == county.county).first()
-    type_count = type_count.type_count if type_count else 0
+    # Get a list of inspection types and numbers in order from most to least common
+    inspection_types = Inspection.select(Inspection.inspection_type, fn.COUNT().alias('type_count')).where(Inspection.county == county.county).group_by(Inspection.inspection_type).order_by(fn.COUNT().desc())
+
+    # Get the name of the most common inspection type
+    inspection_type_name = inspection_types[0].inspection_type
+
+    # Get the number of that kind of inspection
+    inspection_type_count = inspection_types[0].type_count
 
     # Insert the aggregated data into the CountyInspectionTotal table
     CountyInspectionTotal.create(
@@ -86,6 +93,8 @@ for county in counties:
         sig_count=sig_count,
         non_count=non_count,
         total_count=total_count,
-        inspection_type_name=county.inspection_types,
-        inspection_type_count=type_count
+        inspection_type_name=inspection_type_name,
+        inspection_type_count=inspection_type_count
     )
+
+   
