@@ -56,9 +56,10 @@ total_county_inspections = (Inspection
                             .select(Inspection.county, fn.COUNT().alias('total_count'))
                             .group_by(Inspection.county))
 
-commonest_county_inspection_type =(Inspection
+inspection_types = (Inspection
                             .select(Inspection.inspection_type, fn.COUNT().alias('type_count'))
-                            .where(Inspection.county == ))
+                            .group_by(Inspection.inspection_type)
+                            .order_by(fn.COUNT().desc()))
 
 # Iterate through the counties and get the aggregate data
 for county in counties:
@@ -74,11 +75,17 @@ for county in counties:
     total_count = total_county_inspections.where(Inspection.county == county.county).first()
     total_count = total_count.total_count if total_count else 0
 
+    # Get the inspection_type count
+    type_count = inspection_types.where(Inspection.county == county.county).first()
+    type_count = type_count.type_count if type_count else 0
+
     # Insert the aggregated data into the CountyInspectionTotal table
     CountyInspectionTotal.create(
         county=county.county,
         slug=county.slug,
         sig_count=sig_count,
         non_count=non_count,
-        total_count=total_count
+        total_count=total_count,
+        inspection_type=inspection_types.county,
+        type_count=type_count
     )
