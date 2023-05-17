@@ -23,13 +23,24 @@
         src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
 
+<header class="header">
+    <div class="row align-items-center banner">
+        <div class="col-lg-7">
+            <img src="static/water_quality_cropped.jpg" class="img-fluid"
+                alt="photo of Blue Water Baltimore members testing water quality in Gwynns Falls in Baltimore">
+        </div>
+        <div class="col-lg-5">
+            <p>Maryland Water and Science Administration Inspections</p>
+            <h1>Who's polluting Maryland's water, and who is Maryland penalizing for it?</h1>
+            <p class="credit">Photo: <a href="https://www.flickr.com/photos/29388462@N06/32895950516/">Chesapeake Bay Program</a> | Flickr</p>
+        </div>
+    </div>
+</header>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
-    </nav>
     <div class="container">
-        <h1>Who's polluting Maryland's water, and who is Maryland penalizing for it?</h1>
-        <p class="lead">Inspectors from the Maryland Water and Science Administration's field offices visit sites that discharge wastewater to determine
+        <p class="lead">Inspectors from the Maryland Water and Science Administration visit sites that
+            discharge wastewater to determine
             their compliance with their National Pollutant Discharge Elimination System (NPDES) permits and report the
             results of these inspections to the Maryland Department of the Environment each year.</p>
         <p class="lead">WSA publishes its compliance inspections <a
@@ -41,12 +52,13 @@
                 Enforcement & Compliance Report</a> including WSA reported data.</p>
         <p class="lead">But because inspection and enforcement data are published separately, state reporting doesn't
             make it easy to trace inspections and enforcement actions for individual sites.</p>
-        <p class="lead">Where has WSA reported the most instances of significant noncompliance with state and federal
+        <p class="lead">The WSA has reported a total of <b>{{ inspection_count }} inspections</b> since 2016. </p>
+        <p class="lead"> Here's where the state found the most instances of "significant noncompliance" with state and federal law.</p>
+        <!--<p class="lead">Where has WSA reported the most instances of significant noncompliance with state and federal
             water pollution standards? And when do failed inspections result in enforcement actions such as consent
             orders or fines?</p>
-        <p class="lead">Use this exploratory tool to find out.</p>
-        <br>
-        <p class="lead">The WSA has reported a total of <b>{{ inspection_count }} inspections</b> since 2016. </p>
+        <p class="lead">Use this exploratory tool to find out.</p>-->
+        
         <h2>Outcomes by County</h2>
         <table border=1 cellpadding=7>
             <tr>

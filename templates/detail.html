@@ -27,13 +27,16 @@
     <div class="container">
         <p class="breadcrumbs"><a href="/">Home</a> >>> <b>County</b> >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
                 href="/county/{{ slug }}/actions">Actions</a></p>
-        <h1>{{ county }} </h1>
+        <h1>{{ county }} {% if county != "Baltimore City" %} County{% endif %}</h1>
         <p class="lead">The WSA has reported {{ inspections_count }} total
             <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a
                 href="/county/{{ slug }}/actions">
                 enforcement
-                actions</a> for this area. Here are the most recent ones.
+                actions</a> for this area.
         </p>
+        <p class="lead">{{ commonest_inspection_type }} </p>
+        <p class="lead">{{ commonest_inspection_number }}</p>
+        <p>Here are the most recent ones.</p>
         <table border=1 cellpadding=7>
             <h2>Most Recent Inspections</h2>
             <tr>

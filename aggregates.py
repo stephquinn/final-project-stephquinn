@@ -56,6 +56,10 @@ total_county_inspections = (Inspection
                             .select(Inspection.county, fn.COUNT().alias('total_count'))
                             .group_by(Inspection.county))
 
+commonest_county_inspection_type =(Inspection
+                            .select(Inspection.inspection_type, fn.COUNT().alias('type_count'))
+                            .where(Inspection.county == ))
+
 # Iterate through the counties and get the aggregate data
 for county in counties:
     # Get the significant noncompliance count
