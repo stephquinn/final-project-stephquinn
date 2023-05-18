@@ -114,14 +114,14 @@ def detail(slug):
     county_total = CountyInspectionTotal.select().where(CountyInspectionTotal.slug==slug).get()
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
 
-    Notice that in my return render_template line, I defined county_total=county_total.
+Notice that in my return render_template line, I defined county_total=county_total.
 
-    So for Prince George's County, that record would look like this:
-    Prince George's          28              514             1644            NPDES Construction Activity     840
+So for Prince George's County, that record would look like this:
+Prince George's          28              514             1644            NPDES Construction Activity     840
 
-    The last two items are the ones I want on my template, or detail.html.
+The last two items are the ones I want on my template, or detail.html.
 
-    So...on to detail.html. There, I used the templating engine Jinja to reference the name and number of the most common inspection type. The name or number is the part in the double brackets below. The rest is just normal HTML.
+So...on to detail.html. There, I used the templating engine Jinja to reference the name and number of the most common inspection type. The name or number is the part in the double brackets below. The rest is just normal HTML.
 
 <p class="lead">The most common type of inspection focused on {{ county_total.inspection_type_name }}. There were {{ county_total.inspection_type_count }} of this kind of inspection.</p>
 
