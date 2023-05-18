@@ -83,7 +83,7 @@ def detail(slug):
     inspections_count = len(Inspection.select().where(Inspection.slug==slug))
     actions_count = len(Action.select().where(Action.slug==slug))
     county = inspections[0].county
-    county_total = CountyInspectionTotal.where(CountyInspectionTotal.slug==slug).get()
+    county_total = CountyInspectionTotal.select().where(CountyInspectionTotal.slug==slug).get()
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
 
 # if i'm capturing a value in a url, it needs to be surrounded by <> in the route
