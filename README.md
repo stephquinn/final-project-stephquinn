@@ -2,7 +2,7 @@
 # final-project
 FINAL UPDATE:
 
-My app uses data from the Maryland Water and Science Administration's reporting on inspections and enforcement actions it conducts on sites throughout the state that discharge waste into the state's waters. My aim was to shed light on the behavior of the WSA and the sites it oversees by a) calculating and displaying aggregates and b) bringing together data from the WSA's inspection and enforcement action datasets, which are published separately.
+My app uses data from the Maryland Water and Science Administration's reporting on inspections and enforcement actions it conducts on sites throughout the state that discharge waste into the state's waters. My aim was to shed light on the behavior of the WSA and the sites it oversees by a) calculating and displaying aggregates and b) bringing together data from the WSA's inspection and enforcement action datasets, which are published separately. It's deployed via codespaces.
 
 My first step was to store WSA inspection and action data in a SQLite database and display it on a page. I drew this data from separate inspection and action csv files. I used a bash file to insert the data from these csv files into my SQLite database. Initially, I think I only defined one Inspection model in my app.py and displayed all of the columns in my index.html. I didn't realize at first that every time I ran the bash file, it was adding the data from the csv into my db on top of the same data that was already there. I had to add code to my bash file to remove the existing db before reloading the data.
 
