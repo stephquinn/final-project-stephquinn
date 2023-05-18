@@ -28,15 +28,15 @@
         <p class="breadcrumbs"><a href="/">Home</a> >>> <b>County</b> >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
                 href="/county/{{ slug }}/actions">Actions</a></p>
         <h1>{{ county }} {% if county != "Baltimore City" %} County{% endif %}</h1>
-        <p class="lead">The WSA has reported {{ inspections_count }} total
-            <a href="/county/{{ slug }}/inspections">inspections</a> and {{ actions_count }} <a
-                href="/county/{{ slug }}/actions">
+        <p class="lead">The WSA has reported <b>{{ inspections_count }} total inspections</b> and <b>{{ actions_count }} 
                 enforcement
-                actions</a> for this area.
+                actions</b> for this area.
         </p>
-        <p class="lead">{{ county_total.inspection_type_name }} </p>
-        <p class="lead">{{ county_total.inspection_type_count }} </p>
-        <p>Here are the most recent ones.</p>
+        <p class="lead">The most common type of inspection in this area focused on <b>{{ county_total.inspection_type_name }}</b>. There were {{ county_total.inspection_type_count }} of this kind of inspection.</p>
+        <p class="lead">The most common type of enforcement action in this area was a <b>{{ county_total.action_type_name }}</b>. There were {{ county_total.action_type_count }} of this kind of enforcement action.</p>
+        <p class="lead">Click for complete lists of <a href="/county/{{ slug }}/inspections">inspections</a> and <a
+            href="/county/{{ slug }}/actions">enforcement actions</a> for this area.</p>
+        <p class="lead">Here are the most recent inspections and enforcement actions in this county.</p>
         <table border=1 cellpadding=7>
             <h2>Most Recent Inspections</h2>
             <tr>

@@ -26,7 +26,26 @@ class Inspection(Model):
         database = db
         primary_key = CompositeKey('site_no', 'inspection_date', 'inspection_type')
 
-class CountyInspectionTotal(Model):
+class Action(Model):
+    document = CharField()
+    site_no = CharField()
+    site_name = CharField()
+    city_state_zip = CharField()
+    county = CharField()
+    enforcement_action = CharField()
+    enforcement_action_number = CharField()
+    enforcement_action_issued = DateField()
+    case_closed = DateField()
+    media = CharField()
+    program = CharField()
+    slug = CharField()
+
+    class Meta:
+        table_name = "actions"
+        database = db
+        primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
+
+class CountyTotal(Model):
     county = CharField()
     sig_count = IntegerField()
     non_count = IntegerField()
@@ -34,12 +53,14 @@ class CountyInspectionTotal(Model):
     slug = CharField()
     inspection_type_name = CharField()
     inspection_type_count = IntegerField()
+    action_type_name = CharField()
+    action_type_count = IntegerField()
 
     class Meta:
-        table_name = "county_inspection_totals"
+        table_name = "county_total_table"
         database = db
 
-db.create_tables([CountyInspectionTotal])
+db.create_tables([CountyTotal])
 
 
 # Query all the distinct counties
@@ -81,15 +102,26 @@ for county in counties:
     # Get the number of that kind of inspection
     inspection_type_count = inspection_types[0].type_count
 
-    # Insert the aggregated data into the CountyInspectionTotal table
-    CountyInspectionTotal.create(
+    # Get a list of action types and numbers in order from most to least common
+    action_types = Action.select(Action.enforcement_action, fn.COUNT().alias('type_count2')).where(Action.county == county.county).group_by(Action.enforcement_action).order_by(fn.COUNT().desc())
+
+    # Get the name of the most common action type
+    action_type_name = action_types[0].enforcement_action
+
+    # Get the number of that kind of action
+    action_type_count = action_types[0].type_count2
+
+    # Insert the aggregated data into the CountyTotal table
+    CountyTotal.create(
         county=county.county,
         slug=county.slug,
         sig_count=sig_count,
         non_count=non_count,
         total_count=total_count,
         inspection_type_name=inspection_type_name,
-        inspection_type_count=inspection_type_count
+        inspection_type_count=inspection_type_count,
+        action_type_name=action_type_name,
+        action_type_count=action_type_count
     )
 
    

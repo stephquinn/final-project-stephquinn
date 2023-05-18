@@ -54,7 +54,7 @@ class Action(Model):
         database = db
         primary_key = CompositeKey('site_no', 'enforcement_action_issued', 'media')
 
-class CountyInspectionTotal(Model):
+class CountyTotal(Model):
     county = CharField()
     sig_count = IntegerField()
     non_count = IntegerField()
@@ -62,16 +62,18 @@ class CountyInspectionTotal(Model):
     slug = CharField()
     inspection_type_name = CharField()
     inspection_type_count = IntegerField()
+    action_type_name = CharField()
+    action_type_count = IntegerField()
 
     class Meta:
-        table_name = "county_inspection_totals"
+        table_name = "county_total_table"
         database = db
 
 #define variables to be displayed on index page
 @app.route('/')
 def index():
     inspection_count = Inspection.select().count()
-    county_totals = CountyInspectionTotal.select().order_by(CountyInspectionTotal.sig_count.desc())
+    county_totals = CountyTotal.select().order_by(CountyTotal.sig_count.desc())
     template = "index.html"
     return render_template(template, inspection_count=inspection_count, county_totals=county_totals)
    
@@ -83,7 +85,7 @@ def detail(slug):
     inspections_count = len(Inspection.select().where(Inspection.slug==slug))
     actions_count = len(Action.select().where(Action.slug==slug))
     county = inspections[0].county
-    county_total = CountyInspectionTotal.select().where(CountyInspectionTotal.slug==slug).get()
+    county_total = CountyTotal.select().where(CountyTotal.slug==slug).get()
     return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
 
 # if i'm capturing a value in a url, it needs to be surrounded by <> in the route
