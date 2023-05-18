@@ -14,7 +14,7 @@ I distinguished between county detail pages that displayed the most recent inspe
 
 In the end, writing my blog post tonight was a gamechanger in forcing me to write out how different elements of my app fit together. I think if I had been more diligent about explaining to myself my understanding of how the app worked throughout this process, I might have felt less lost. On the other hand, I feel proud of what I've accomplished, even though there's a lot more that I could do.
 
-If I were to really "publish" this app, I would probably write a 
+If I were to really "publish" this app, I would probably write a scraper and a yaml file so my app could update with new WSA data and to automate the app's workflow. Right now, I'm using old data that isn't updating, which is a weakness.
 
 
 
