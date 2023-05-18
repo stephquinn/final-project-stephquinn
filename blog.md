@@ -27,6 +27,7 @@ As I figured out what to do next, it helped me to visualize the table I was crea
 
 County      Sig_count       Non_count       Total_count ... Inspection_type_name       Inspection_type_count
 PG          28              514             1644            NPDES Construction Activity     840
+The other counties too...
 
 I'm new to Python, so when figuring out how to define these new variables, I thought about what I would do in R.
 
@@ -82,6 +83,48 @@ What we want is just the first cell in each column. Time to define more variable
 
 Now we have our data!
 
-Now to display it. That means
+Now to display it. That means using an app.py file to pass the relevant variables to an html template, which is where the information shows up on the internet.
+
+I used the @app.route() feature of Flask to set up county detail pages that show the most recent inspections and actions for the specified county. These county detail pages were where I wanted to display the name and number of the most common type of inspection (and, eventually, the most common type of enforcement action), so that detail page is where I took my next steps.
+
+Here's what this route and the accompanying function looked like before. 
+
+@app.route('/county/<slug>')
+def detail(slug):
+    slug = slug
+    inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc()).limit(10)
+    actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
+    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    actions_count = len(Action.select().where(Action.slug==slug))
+    county = inspections[0].county
+    return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
+
+    It didn't reference the CountyInspectionTotal table, which was problematic because I needed this table to retrieve the county data I just collected in my aggregates.py file.
+
+    So I added a line fetching the record/row for the county in question and calling it county_total:
+
+    @app.route('/county/<slug>')
+def detail(slug):
+    slug = slug
+    inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc()).limit(10)
+    actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
+    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    actions_count = len(Action.select().where(Action.slug==slug))
+    county = inspections[0].county
+    county_total = CountyInspectionTotal.select().where(CountyInspectionTotal.slug==slug).get()
+    return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
+
+    Notice that in my return render_template line, I defined county_total=county_total.
+
+    So for Prince George's County, that record would look like this:
+    Prince George's          28              514             1644            NPDES Construction Activity     840
+
+    The last two items are the ones I want on my template, or detail.html.
+
+    So...on to detail.html. There, I used the templating engine Jinja to reference the name and number of the most common inspection type. The name or number is the part in the double brackets below. The rest is just normal HTML.
+
+<p class="lead">The most common type of inspection focused on {{ county_total.inspection_type_name }}. There were {{ county_total.inspection_type_count }} of this kind of inspection.</p>
+
+In the county_total record/row for the county that detail page is about, we're pulling the value of the column inspection_type_name or inspection_type_count. We're communicating across files and pages! It's complicated. But pretty cool. Happy app developing!
 
 
