@@ -1,6 +1,25 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10834836)
 # final-project
+FINAL UPDATE:
 
+My app uses data from the Maryland Water and Science Administration's reporting on inspections and enforcement actions it conducts on sites throughout the state that discharge waste into the state's waters. My aim was to shed light on the behavior of the WSA and the sites it oversees by a) calculating and displaying aggregates and b) bringing together data from the WSA's inspection and enforcement action datasets, which are published separately.
+
+My first step was to store WSA inspection and action data in a SQLite database and display it on a page. I drew this data from separate inspection and action csv files. I used a bash file to insert the data from these csv files into my SQLite database. Initially, I think I only defined one Inspection model in my app.py and displayed all of the columns in my index.html. I didn't realize at first that every time I ran the bash file, it was adding the data from the csv into my db on top of the same data that was already there. I had to add code to my bash file to remove the existing db before reloading the data.
+
+The next week, I revamped the index page to display the total numbers of inspections - and numbers of inspections that detected "significant noncompliance" and "noncompliance" - for each county and the City of Baltimore. To do this, I used my existing Inspection table to create a new table containing these aggregates in a separate aggregates.py file. I also linked each county name on the index page to a detail page displaying inspections and enforcement actions for that area. Multiple tables and multiple pages!
+
+From there, I quickly got very confused. I had a lot of trouble figuring out how the various files fit together and where I was creating a label that could be as random as "donkey" and when I had to be very precise in referring to a specific existing label. I struggled to get the tables on my detail page to display the records in reverse chronological order, which I realized was because the dates in the records were not formatted correctly. I used an update_data.py page to change these dates in my inspection and action tables, which meant that I then had to remember the order in which I had to run the various files to get my app up and running. Revising my bash data file to run both my aggregates and update_data files was very helpful.
+
+I distinguished between county detail pages that displayed the most recent inspections and actions and further detail pages that listed all that county's inspections and actions separately. I realized that I hadn't really done anything to allow users to track the state's history of inspecting and penalizing individual sites, so I linked each site name in the detail page to a site page listing all the inspections and actions for that site.
+
+In the end, writing my blog post tonight was a gamechanger in forcing me to write out how different elements of my app fit together. I think if I had been more diligent about explaining to myself my understanding of how the app worked throughout this process, I might have felt less lost. On the other hand, I feel proud of what I've accomplished, even though there's a lot more that I could do.
+
+If I were to really "publish" this app, I would probably write a 
+
+
+
+
+--
 breadcrumbs?
 
 5/5 update:

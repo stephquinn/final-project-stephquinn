@@ -6,7 +6,7 @@ from flask import Flask
 from flask import render_template
 app = Flask(__name__)
 
-#create a Sqlite database to hold my tables (one for inspections and one for enforcement actions)
+#create a Sqlite database to hold my tables
 db = SqliteDatabase('wsa.db')
 
 #define column names and data types for my inspections table
