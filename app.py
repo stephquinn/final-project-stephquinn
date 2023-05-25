@@ -73,20 +73,22 @@ class CountyTotal(Model):
 @app.route('/')
 def index():
     inspection_count = Inspection.select().count()
+    formatted_inspection_count = "{:,}".format(inspection_count)
     county_totals = CountyTotal.select().order_by(CountyTotal.sig_count.desc())
     template = "index.html"
-    return render_template(template, inspection_count=inspection_count, county_totals=county_totals)
+    return render_template(template, inspection_count=inspection_count, county_totals=county_totals, formatted_inspection_count=formatted_inspection_count)
    
 @app.route('/county/<slug>')
 def detail(slug):
     slug = slug
     inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc()).limit(10)
     actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc()).limit(10)
-    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    inspection_count = len(Inspection.select().where(Inspection.slug==slug))
+    formatted_inspection_count = "{:,}".format(inspection_count)
     actions_count = len(Action.select().where(Action.slug==slug))
     county = inspections[0].county
     county_total = CountyTotal.select().where(CountyTotal.slug==slug).get()
-    return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
+    return render_template("detail.html", slug=slug, county=county, inspections=inspections, actions=actions, inspection_count=inspection_count, formatted_inspection_count=formatted_inspection_count, actions_count=actions_count, county_total=county_total)
 
 # if i'm capturing a value in a url, it needs to be surrounded by <> in the route
 @app.route('/site/<site_no>')
@@ -102,20 +104,20 @@ def actions(slug):
     slug = slug
     actions = Action.select().where(Action.slug==slug).order_by(Action.enforcement_action_issued.desc())
     actions_count = len(Action.select().where(Action.slug==slug))
-    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    inspection_count = len(Inspection.select().where(Inspection.slug==slug))
     county = actions[0].county
     county_total = CountyTotal.select().where(CountyTotal.slug==slug).get()
-    return render_template("actions.html", county=county, slug=slug, actions=actions, actions_count=actions_count, inspections_count=inspections_count, county_total=county_total)
+    return render_template("actions.html", county=county, slug=slug, actions=actions, actions_count=actions_count, inspection_count=inspection_count, county_total=county_total)
 
 @app.route('/county/<slug>/inspections')
 def inspections(slug): 
     slug = slug
     inspections = Inspection.select().where(Inspection.slug==slug).order_by(Inspection.inspection_date.desc())
-    inspections_count = len(Inspection.select().where(Inspection.slug==slug))
+    inspection_count = len(Inspection.select().where(Inspection.slug==slug))
     actions_count = len(Action.select().where(Action.slug==slug))
     county = inspections[0].county
     county_total = CountyTotal.select().where(CountyTotal.slug==slug).get()
-    return render_template("inspections.html", slug=slug, county=county, inspections=inspections, inspections_count=inspections_count, actions_count=actions_count, county_total=county_total)
+    return render_template("inspections.html", slug=slug, county=county, inspections=inspections, inspection_count=inspection_count, actions_count=actions_count, county_total=county_total)
 
 if __name__ == '__main__':
     # Fire up the Flask test server
