@@ -28,7 +28,7 @@
         <p class="breadcrumbs"><a href="/">Home</a> >>> <b>County</b> >>> <a href="/county/{{ slug }}/inspections">Inspections</a> >>> <a
                 href="/county/{{ slug }}/actions">Actions</a></p>
         <h1>{{ county }} {% if county != "Baltimore City" %} County{% endif %}</h1>
-        <p>The WSA has reported <b>{{ inspections_count }} total inspections</b> and <b>{{ actions_count }} 
+        <p>The WSA has reported <b>{{ formatted_inspection_count }} total inspections</b> and <b>{{ action_count }} 
                 enforcement
                 actions</b> for this area.
         </p>
