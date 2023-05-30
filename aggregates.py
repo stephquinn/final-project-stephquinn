@@ -79,6 +79,10 @@ total_county_inspections = (Inspection
                             .select(Inspection.county, fn.COUNT().alias('total_count'))
                             .group_by(Inspection.county))
 
+total_county_actions = (Action
+                        .select(Action.county, fn.COUNT().alias('total_actions'))
+                        .group_by(Action.county))
+
 # Iterate through the counties and get the aggregate data
 for county in counties:
     # Get the significant noncompliance count
@@ -110,6 +114,13 @@ for county in counties:
 
     # Get the number of that kind of action
     action_type_count = action_types[0].type_count2
+
+    # Get the total action count
+    total_actions = total_county_actions.where(Action.county == county.county).first()
+    total_actions = total_actions.total_actions if total_actions else 0
+
+    # Get the number of actions per 100 inspections
+    action_frequency = total_actions/total
 
     # Insert the aggregated data into the CountyTotal table
     CountyTotal.create(
