@@ -23,57 +23,62 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
-        <div class="container">
-            <p class="breadcrumbs"><a href="/">Home</a> >>> <b>Site History</b></p>
-            <h1>{{ site_name }}</h1>
-            <p>This site has had <b>{{ formatted_inspection_count }} reported inspections</b> and <b>{{ action_count }} enforcement actions</b> since 2012.</p>
-            <table border=1 cellpadding=7>
-                <h2>Inspections</h2>
-                <tr>
-                    <th>Site Number</th>
-                    <th>Site Name</th>
-                    <th>Location</th>
-                    <th>Inspection Type</th>
-                    <th>Inspection Date</th>
-                    <th>Site Status</th>
-                    <th>Recommended Actions</th>
-                </tr>
-                {% for inspection in inspections %}
-                <tr>
-                    <td>{{ inspection.site_no }}</td>
-                    <td>{{ inspection.site_name }}</td>
-                    <td>{{ inspection.city_state_zip }}</td>
-                    <td>{{ inspection.inspection_type }}</td>
-                    <td>{{ inspection.inspection_date }}</td>
-                    <td>{{ inspection.site_status }}</td>
-                    <td>{{ inspection.recommended_actions }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <table border=1 cellpadding=7>
-                <h2>Enforcement Actions</h2>
-                <tr>
-                    <th>Site Number</th>
-                    <th>Site Name</th>
-                    <th>Location</th>
-                    <th>Enforcement Action</th>
-                    <th>Enforcement Action Issued</th>
-                    <th>Case Closed</th>
-                    <th>Media</th>
-                    <th>Program</th>
-                </tr>
-                {% for action in actions %}
-                <tr>
-                    <td>{{ action.site_no }}</td>
-                    <td>{{ action.site_name }}</td>
-                    <td>{{ action.city_state_zip }}</td>
-                    <td>{{ action.enforcement_action }}</td>
-                    <td>{{ action.enforcement_action_issued }}</td>
-                    <td>{{ action.case_closed }}</td>
-                    <td>{{ action.media }}</td>
-                    <td>{{ action.program }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+    <div class="container">
+        <p class="breadcrumbs"><a href="/">Home</a> >>> <b>Site History</b></p>
+        <h1>{{ site_name }}</h1>
+        <p>This site has had <b>{{ formatted_inspection_count }} reported inspections</b> and <b>{{ action_count }}
+                enforcement actions</b> since 2012.</p>
+        <table border=1 cellpadding=7>
+            <h2>Inspections</h2>
+            <tr>
+                <th>Site Number</th>
+                <th>Site Name</th>
+                <th>Location</th>
+                <th>Inspection Type</th>
+                <th>Inspection Date</th>
+                <th>Site Status</th>
+                <th>Recommended Actions</th>
+            </tr>
+            {% for inspection in inspections %}
+            <tr>
+                <td>{{ inspection.site_no }}</td>
+                <td>{{ inspection.site_name }}</td>
+                <td>{{ inspection.city_state_zip }}</td>
+                <td>{{ inspection.inspection_type }}</td>
+                <td>{{ inspection.inspection_date }}</td>
+                <td>{{ inspection.site_status }}</td>
+                <td>{{ inspection.recommended_actions }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if actions %}
+        <table border=1 cellpadding=7>
+            <h2>Enforcement Actions</h2>
+            <tr>
+                <th>Site Number</th>
+                <th>Site Name</th>
+                <th>Location</th>
+                <th>Enforcement Action</th>
+                <th>Enforcement Action Issued</th>
+                <th>Case Closed</th>
+                <th>Media</th>
+                <th>Program</th>
+            </tr>
+            {% for action in actions %}
+            <tr>
+                <td>{{ action.site_no }}</td>
+                <td>{{ action.site_name }}</td>
+                <td>{{ action.city_state_zip }}</td>
+                <td>{{ action.enforcement_action }}</td>
+                <td>{{ action.enforcement_action_issued }}</td>
+                <td>{{ action.case_closed }}</td>
+                <td>{{ action.media }}</td>
+                <td>{{ action.program }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="empty">No enforcement actions to display.</p>
+        {% endif %}
+    </div>
 </body>
