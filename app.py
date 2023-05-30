@@ -64,6 +64,8 @@ class CountyTotal(Model):
     inspection_type_count = IntegerField()
     action_type_name = CharField()
     action_type_count = IntegerField()
+    total_actions = IntegerField()
+    action_frequency = IntegerField()
 
     class Meta:
         table_name = "county_total_table"
@@ -75,6 +77,7 @@ def index():
     inspection_count = Inspection.select().count()
     formatted_inspection_count = "{:,}".format(inspection_count)
     county_totals = CountyTotal.select().order_by(CountyTotal.sig_count.desc())
+    
     template = "index.html"
     return render_template(template, inspection_count=inspection_count, county_totals=county_totals, formatted_inspection_count=formatted_inspection_count)
    

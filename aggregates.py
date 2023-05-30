@@ -55,6 +55,8 @@ class CountyTotal(Model):
     inspection_type_count = IntegerField()
     action_type_name = CharField()
     action_type_count = IntegerField()
+    total_actions = IntegerField()
+    action_frequency = IntegerField()
 
     class Meta:
         table_name = "county_total_table"
@@ -82,6 +84,7 @@ total_county_inspections = (Inspection
 total_county_actions = (Action
                         .select(Action.county, fn.COUNT().alias('total_actions'))
                         .group_by(Action.county))
+
 
 # Iterate through the counties and get the aggregate data
 for county in counties:
@@ -120,7 +123,7 @@ for county in counties:
     total_actions = total_actions.total_actions if total_actions else 0
 
     # Get the number of actions per 100 inspections
-    action_frequency = total_actions/total
+    action_frequency = (total_actions/total_count) * 100 if total_actions != 0 else 0
 
     # Insert the aggregated data into the CountyTotal table
     CountyTotal.create(
@@ -132,7 +135,9 @@ for county in counties:
         inspection_type_name=inspection_type_name,
         inspection_type_count=inspection_type_count,
         action_type_name=action_type_name,
-        action_type_count=action_type_count
+        action_type_count=action_type_count,
+        total_actions=total_actions,
+        action_frequency=action_frequency
     )
 
    

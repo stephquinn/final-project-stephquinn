@@ -57,6 +57,7 @@
                 <th><b>Significant Noncompliance</b></th>
                 <th>Noncompliance</th>
                 <th>Total Inspections</th>
+                <th>Actions per 100 Inspections</th>
             </tr>
             {% for county in county_totals %}
             {% if county.county not in ['Not Yet Determined', 'Outside of Maryland'] %}
@@ -65,6 +66,7 @@
                 <td><b>{{ county.sig_count }}</b></td>
                 <td>{{ county.non_count }}</td>
                 <td>{{ county.total_count }}</td>
+                <td>{{ county.action_frequency }}</td>
             </tr>
             {% endif %}
             {% endfor %}
