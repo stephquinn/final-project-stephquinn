@@ -28,7 +28,7 @@
         <p class="breadcrumbs"><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b> >>> <a
                 href="/county/{{ slug }}/actions">Actions</a></p>
         <h1>Inspections: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{% endif %}</a></h1>
-        <p>The WSA reported <b>{{ formatted_inspection_count }} total inspections for this area</b>.</p>
+        <p>The WSA reported <b>{{ formatted_inspection_count }} {% if formatted_inspection_count == 1 %}inspection{% else %}total inspections{% endif %} inspections for this area</b>.</p>
         <p>The <b>most common type of inspection</b> in this area focused on <b>{{ county_total.inspection_type_name }}</b>. There were <b>{{ county_total.inspection_type_count }}</b> of this kind of inspection.</p>
         <p>Click <a
                 href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
