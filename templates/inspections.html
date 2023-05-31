@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
     <title>{{ county }} {% if county != "Baltimore City" %} County{% endif %}: Inspections</title>
@@ -16,7 +16,7 @@
         rel="stylesheet">
     <!--css-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        crossorigin="anonymous">
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
 </head>
 
@@ -25,13 +25,15 @@
         <a class="navbar-brand" href="/">WSA Inspection Outcomes</a>
     </nav>
     <div class="container">
-        <p class="breadcrumbs"><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b> >>> <a
-                href="/county/{{ slug }}/actions">Actions</a></p>
-        <h1>Inspections: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{% endif %}</a></h1>
-        <p>The WSA reported <b>{{ formatted_inspection_count }} {% if formatted_inspection_count == 1 %}inspection{% else %}total inspections{% endif %} inspections for this area</b>.</p>
-        <p>The <b>most common type of inspection</b> in this area focused on <b>{{ county_total.inspection_type_name }}</b>. There were <b>{{ county_total.inspection_type_count }}</b> of this kind of inspection.</p>
-        <p>Click <a
-                href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
+        <p class="breadcrumbs"><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <b>Inspections</b>
+            >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
+        <h1>Inspections: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{% endif
+                %}</a></h1>
+        <p>The WSA reported <b>{{ formatted_inspection_count }} {% if formatted_inspection_count == 1 %}inspection{%
+                else %}total inspections{% endif %}</b> for this area.</p>
+        <p>The <b>most common type of inspection</b> in this area focused on <b>{{ county_total.inspection_type_name
+                }}</b>. There were <b>{{ county_total.inspection_type_count }}</b> of this kind of inspection.</p>
+        <p>Click <a href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
         <table border=1 cellpadding=7>
             <h2>Inspections</h2>
             <tr>
@@ -57,3 +59,5 @@
         </table>
     </div>
 </body>
+
+</html>

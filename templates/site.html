@@ -28,7 +28,8 @@
         <h1>{{ site_name }}</h1>
         <p>This site has had <b>{{ formatted_inspection_count }} reported {% if formatted_inspection_count == 1 %}inspection{% else %}inspections{% endif %}</b> and <b>{{ action_count }} enforcement {% if action_count == 1 %}action{% else %}actions{% endif %}
                 </b> since 2012.</p>
-        <table border=1 cellpadding=7>
+        {% if inspections %}
+                <table border=1 cellpadding=7>
             <h2>Inspections</h2>
             <tr>
                 <th>Site Number</th>
@@ -51,6 +52,9 @@
             </tr>
             {% endfor %}
         </table>
+        {% else %}
+        <p class="empty">No inspections to display.</p>
+        {% endif %}
         {% if actions %}
         <table border=1 cellpadding=7>
             <h2>Enforcement Actions</h2>

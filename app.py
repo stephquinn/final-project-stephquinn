@@ -101,7 +101,7 @@ def site(site_no):
     inspections = Inspection.select().where(Inspection.site_no==site_no).order_by(Inspection.inspection_date.desc())
     inspection_count = len(Inspection.select().where(Inspection.site_no==site_no))
     formatted_inspection_count = "{:,}".format(inspection_count)
-    site_name = inspections[0].site_name
+    site_name = inspections[0].site_name if inspections else (actions[0].site_name if actions else None)
     return render_template("site.html", actions=actions, action_count=action_count, inspections=inspections, inspection_count=inspection_count, formatted_inspection_count=formatted_inspection_count, site_name=site_name)
 
 @app.route('/county/<slug>/actions')

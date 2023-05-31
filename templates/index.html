@@ -34,22 +34,8 @@
 
 <body>
     <div class="container">
-        <p class="lead">Inspectors from the Maryland Water and Science Administration visit sites that
-            discharge wastewater to determine
-            their compliance with their National Pollutant Discharge Elimination System (NPDES) permits and report the
-            results of these inspections to the Maryland Department of the Environment each year.</p>
-        <p class="lead">WSA publishes its compliance inspections <a
-                href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20Compliance">here</a> and its
-            enforcement actions <a
-                href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20EnforcementViolations">here</a>. MDE
-            also releases an <a
-                href="https://mde.maryland.gov/Documents/FY22%20MDE%20Annual%20Enforcement%20and%20Compliance%20Report.pdf">Annual
-                Enforcement & Compliance Report</a> including WSA reported data.</p>
-        <p class="lead">But because inspection and enforcement data are published separately, state reporting doesn't
-            make it easy to trace inspections and enforcement actions for individual sites.</p>
         <p class="lead">The WSA has reported a total of <b>{{ formatted_inspection_count }} inspections</b> since 2016. </p>
         <p class="lead"> Here's where the state found the most instances of "significant noncompliance" with state and federal law.</p>
-        
         <h2>Outcomes by County</h2>
         <table border=1 cellpadding=7>
             <tr>
@@ -71,7 +57,19 @@
             {% endif %}
             {% endfor %}
         </table>
-
+        <p class="lead">Inspectors from the Maryland Water and Science Administration visit sites that
+            discharge wastewater to determine
+            their compliance with their National Pollutant Discharge Elimination System (NPDES) permits and report the
+            results of these inspections to the Maryland Department of the Environment each year.</p>
+        <p class="lead">WSA publishes its compliance inspections <a
+                href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20Compliance">here</a> and its
+            enforcement actions <a
+                href="https://mdedataviewer.mde.state.md.us/Public/Water/WSA%20EnforcementViolations">here</a>. MDE
+            also releases an <a
+                href="https://mde.maryland.gov/Documents/FY22%20MDE%20Annual%20Enforcement%20and%20Compliance%20Report.pdf">Annual
+                Enforcement & Compliance Report</a> including WSA reported data.</p>
+        <p class="lead">But because inspection and enforcement data are published separately, state reporting doesn't
+            make it easy to trace inspections and enforcement actions for individual sites.</p>
     </div>
 </body>
 
