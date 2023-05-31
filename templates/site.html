@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--meta-->
-    <title>{{ county }}</title>
+    <title>{{ site_name }}</title>
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +26,8 @@
     <div class="container">
         <p class="breadcrumbs"><a href="/">Home</a> >>> <b>Site History</b></p>
         <h1>{{ site_name }}</h1>
-        <p>This site has had <b>{{ formatted_inspection_count }} reported inspections</b> and <b>{{ action_count }}
-                enforcement actions</b> since 2012.</p>
+        <p>This site has had <b>{{ formatted_inspection_count }} reported {% if formatted_inspection_count == 1 %}inspection{% else %}inspections{% endif %}</b> and <b>{{ action_count }} enforcement {% if action_count == 1 %}action{% else %}actions{% endif %}
+                </b> since 2012.</p>
         <table border=1 cellpadding=7>
             <h2>Inspections</h2>
             <tr>
