@@ -3,6 +3,7 @@
 
 <head>
     <title>{{ county }} {% if county != "Baltimore City" %} County{% endif %}: Inspections</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,6 +19,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
+    <!--datatable and jquery-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://www.unpkg.com/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -29,35 +35,42 @@
             >>> <a href="/county/{{ slug }}/actions">Actions</a></p>
         <h1>Inspections: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{% endif
                 %}</a></h1>
-        <p>The WSA reported <b>{{ formatted_inspection_count }} {% if formatted_inspection_count == 1 %}inspection{%
+        <p>The WSA reported <b>{{ formatted_inspection_count }} {% if formatted_inspection_count == "1" %}inspection{%
                 else %}total inspections{% endif %}</b> for this area.</p>
         <p>The <b>most common type of inspection</b> in this area focused on <b>{{ county_total.inspection_type_name
                 }}</b>. There were <b>{{ county_total.inspection_type_count }}</b> of this kind of inspection.</p>
         <p>Click <a href="/county/{{ slug }}/actions">here</a> for enforcement actions.</p>
-        <table border=1 cellpadding=7>
+        <table border=1 cellpadding=7 id="table_id" class="display">
             <h2>Inspections</h2>
-            <tr>
-                <th>Site Number</th>
-                <th>Site Name</th>
-                <th>Location</th>
-                <th>Inspection Type</th>
-                <th>Inspection Date</th>
-                <th>Site Status</th>
-                <th>Recommended Actions</th>
-            </tr>
-            {% for inspection in inspections %}
-            <tr>
-                <td>{{ inspection.site_no }}</td>
-                <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
-                <td>{{ inspection.city_state_zip }}</td>
-                <td>{{ inspection.inspection_type }}</td>
-                <td>{{ inspection.inspection_date }}</td>
-                <td>{{ inspection.site_status }}</td>
-                <td>{{ inspection.recommended_actions }}</td>
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th>Site Number</th>
+                    <th>Site Name</th>
+                    <th>Location</th>
+                    <th>Inspection Type</th>
+                    <th>Inspection Date</th>
+                    <th>Site Status</th>
+                    <th>Recommended Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inspection in inspections %}
+                <tr>
+                    <td>{{ inspection.site_no }}</td>
+                    <td><a href="/site/{{ inspection.site_no }}">{{ inspection.site_name }}</a></td>
+                    <td>{{ inspection.city_state_zip }}</td>
+                    <td>{{ inspection.inspection_type }}</td>
+                    <td>{{ inspection.inspection_date }}</td>
+                    <td>{{ inspection.site_status }}</td>
+                    <td>{{ inspection.recommended_actions }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
+    <script>$(document).ready(function () {
+            $('#table_id').DataTable();
+        });</script>
 </body>
 
 </html>
