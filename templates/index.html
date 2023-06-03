@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Maryland Water and Science Administration Data</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
+    <!--datatable and jquery-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://www.unpkg.com/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
 
 <header class="header">
@@ -27,35 +33,42 @@
         <div class="col-lg-5">
             <p>Maryland Water and Science Administration Inspections</p>
             <h1>Who's polluting Maryland's water, and who is Maryland penalizing for it?</h1>
-            <p class="credit">Photo: <a href="https://www.flickr.com/photos/29388462@N06/32895950516/">Chesapeake Bay Program</a> | Flickr</p>
+            <p class="credit">Photo: <a href="https://www.flickr.com/photos/29388462@N06/32895950516/">Chesapeake Bay
+                    Program</a> | Flickr</p>
         </div>
     </div>
 </header>
 
 <body>
     <div class="container">
-        <p class="lead">The WSA has reported a total of <b>{{ formatted_inspection_count }} inspections</b> since 2016. </p>
-        <p class="lead"> Here's where the state found the most instances of "significant noncompliance" with state and federal law.</p>
+        <p class="lead">The WSA has reported a total of <b>{{ formatted_inspection_count }} inspections</b> since 2016.
+        </p>
+        <p class="lead"> Here's where the state found the most instances of "significant noncompliance" with state and
+            federal law.</p>
         <h2>Outcomes by County</h2>
-        <table border=1 cellpadding=7>
-            <tr>
-                <th>County</th>
-                <th><b>Significant Noncompliance</b></th>
-                <th>Noncompliance</th>
-                <th>Total Inspections</th>
-                <th>Actions per 100 Inspections</th>
-            </tr>
-            {% for county in county_totals %}
-            {% if county.county not in ['Not Yet Determined', 'Outside of Maryland'] %}
-            <tr>
-                <td><a href="/county/{{ county.slug }}">{{ county.county }}</a></td>
-                <td><b>{{ county.sig_count }}</b></td>
-                <td>{{ county.non_count }}</td>
-                <td>{{ county.total_count }}</td>
-                <td>{{ county.action_frequency }}</td>
-            </tr>
-            {% endif %}
-            {% endfor %}
+        <table border=1 cellpadding=7 id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th>County</th>
+                    <th><b>Significant Noncompliance</b></th>
+                    <th>Noncompliance</th>
+                    <th>Total Inspections</th>
+                    <th>Actions per 100 Inspections</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for county in county_totals %}
+                {% if county.county not in ['Not Yet Determined', 'Outside of Maryland'] %}
+                <tr>
+                    <td><a href="/county/{{ county.slug }}">{{ county.county }}</a></td>
+                    <td><b>{{ county.sig_count }}</b></td>
+                    <td>{{ county.non_count }}</td>
+                    <td>{{ county.total_count }}</td>
+                    <td>{{ county.action_frequency }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
         </table>
         <p class="lead">Inspectors from the Maryland Water and Science Administration visit sites that
             discharge wastewater to determine
@@ -71,6 +84,12 @@
         <p class="lead">But because inspection and enforcement data are published separately, state reporting doesn't
             make it easy to trace inspections and enforcement actions for individual sites.</p>
     </div>
+    <script>$(document).ready(function () {
+        $('#table_id').DataTable({
+            lengthMenu: [[-1], ["All"]],
+            pageLength: -1
+        });
+    });</script>
 </body>
 
 </html>
