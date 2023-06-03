@@ -43,8 +43,12 @@
     <div class="container">
         <p class="lead">The WSA has reported a total of <b>{{ formatted_inspection_count }} inspections</b> since 2016.
         </p>
-        <p class="lead"> Here's where the state found the most instances of "significant noncompliance" with state and
-            federal law.</p>
+        <p class="lead"> Use this table to find:</p>
+        <ul>
+            <li>where the state conducted the most inspections</li>
+            <li>where it found the most instances of noncompliance and significant noncompiance with state and federal law</li>
+            <li>how likely inspections were to result in enforcement actions</li>
+        </ul>  
         <h2>Outcomes by County</h2>
         <table border=1 cellpadding=7 id="table_id" class="display">
             <thead>
@@ -70,7 +74,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <p class="lead">Inspectors from the Maryland Water and Science Administration visit sites that
+        <p class="lead explanation">Inspectors from the Maryland Water and Science Administration visit sites that
             discharge wastewater to determine
             their compliance with their National Pollutant Discharge Elimination System (NPDES) permits and report the
             results of these inspections to the Maryland Department of the Environment each year.</p>

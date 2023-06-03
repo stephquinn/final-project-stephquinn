@@ -34,12 +34,14 @@ h1 {
 h2 {
     font-family: 'Merriweather', serif;
     font-size:1.5em;
-    padding:1.5em 0em .5em 0em;
+    padding-top:1.5em;
 }
 
 .empty {
     padding-top:4em;
 }
 
-@media
+.explanation {
+    padding-top:2em;
+}
 
