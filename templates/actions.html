@@ -3,6 +3,7 @@
 
 <head>
     <title>{{ county }} {% if county != "Baltimore City" %} County{% endif %}: Enforcement Actions</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,6 +19,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
+    <!--datatable and jquery-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://www.unpkg.com/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -27,37 +33,46 @@
     <div class="container">
         <p class="breadcrumbs"><a href="/">Home</a> >>> <a href="/county/{{ slug }}">County</a> >>> <a
                 href="/county/{{ slug }}/inspections">Inspections</a> >>> <b>Actions</b></p>
-        <h1>Enforcement Actions: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{% endif %}</a></h1>
-        <p>The WSA reported <b>{{ action_count }} enforcement {% if action_count == 1 %}action{% else %}actions{% endif %}</b> for this area.</p>
-        <p>The <b>most common type of enforcement action</b> in this area was a <b>{{ county_total.action_type_name }}</b>. There were <b>{{ county_total.action_type_count }}</b> of this kind of enforcement action.</p>
-        <p>Click <a
-                href="/county/{{ slug }}/inspections">here</a> for this area's inspections.</p>
-        <table border=1 cellpadding=7>
+        <h1>Enforcement Actions: <a href="/county/{{ slug }}">{{ county }} {% if county != "Baltimore City" %} County{%
+                endif %}</a></h1>
+        <p>The WSA reported <b>{{ action_count }} enforcement {% if action_count == 1 %}action{% else %}actions{% endif
+                %}</b> for this area.</p>
+        <p>The <b>most common type of enforcement action</b> in this area was a <b>{{ county_total.action_type_name
+                }}</b>. There were <b>{{ county_total.action_type_count }}</b> of this kind of enforcement action.</p>
+        <p>Click <a href="/county/{{ slug }}/inspections">here</a> for this area's inspections.</p>
+        <table border=1 cellpadding=7 id="table_id" class="display">
             <h2>Enforcement Actions</h2>
-            <tr>
-                <th>Site Number</th>
-                <th>Site Name</th>
-                <th>Location</th>
-                <th>Enforcement Action</th>
-                <th>Enforcement Action Issued</th>
-                <th>Case Closed</th>
-                <th>Media</th>
-                <th>Program</th>
-            </tr>
-            {% for action in actions %}
-            <tr>
-                <td>{{ action.site_no }}</td>
-                <td><a href="/site/{{ action.site_no }}">{{ action.site_name }}</a></td>
-                <td>{{ action.city_state_zip }}</td>
-                <td>{{ action.enforcement_action }}</td>
-                <td>{{ action.enforcement_action_issued }}</td>
-                <td>{{ action.case_closed }}</td>
-                <td>{{ action.media }}</td>
-                <td>{{ action.program }}</td>
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th>Site Number</th>
+                    <th>Site Name</th>
+                    <th>Location</th>
+                    <th>Enforcement Action</th>
+                    <th>Enforcement Action Issued</th>
+                    <th>Case Closed</th>
+                    <th>Media</th>
+                    <th>Program</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in actions %}
+                <tr>
+                    <td>{{ action.site_no }}</td>
+                    <td><a href="/site/{{ action.site_no }}">{{ action.site_name }}</a></td>
+                    <td>{{ action.city_state_zip }}</td>
+                    <td>{{ action.enforcement_action }}</td>
+                    <td>{{ action.enforcement_action_issued }}</td>
+                    <td>{{ action.case_closed }}</td>
+                    <td>{{ action.media }}</td>
+                    <td>{{ action.program }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
+    <script>$(document).ready(function () {
+            $('#table_id').DataTable();
+        });</script>
 </body>
 
 </html>
